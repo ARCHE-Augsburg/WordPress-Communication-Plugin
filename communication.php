@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Arche Communcation Plugin
-Plugin URI: 
+Plugin Name: ARCHE Augsburg Communcation Plugin
+Plugin URI: https://arche-augsburg.de
 Description: 
-Author: Takayuki Miyoshi
-Author URI: https://ideasilo.wordpress.com/
-Text Domain: contact-form-7
-Domain Path: /languages/
-Version: 4.9.1
+Author: Christian Doernen, Michael Machus
+Author URI: 
+Text Domain:
+Domain Path: 
+Version: 1.0
 */
 ?>
