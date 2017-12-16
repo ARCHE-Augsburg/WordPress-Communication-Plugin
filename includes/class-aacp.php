@@ -121,6 +121,11 @@ class aacp_Core {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-aacp-public.php';
+		
+		/**
+		 * The class responsible for the backend ui of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-backend.php';
 
 		$this->loader = new aacp_Loader();
 
@@ -181,6 +186,12 @@ class aacp_Core {
 	 * @since    1.0.0
 	 */
 	public function run() {
+		
+		$backend = new aacp_Backend();
+		
+		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
+		
+		
 		$this->loader->run();
 	}
 
