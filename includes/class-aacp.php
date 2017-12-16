@@ -27,7 +27,7 @@
  * @subpackage Plugin_Name/includes
  * @author     Your Name <email@example.com>
  */
-class Aacp_Core {
+class aacp_Core {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power

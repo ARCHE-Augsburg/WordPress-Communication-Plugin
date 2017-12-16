@@ -68,7 +68,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-aacp.php';
  */
 function run_aacp() {
 
-	$plugin = new Aacp_Core();
+	$plugin = new aacp_Core();
 	$plugin->run();
 
 }
