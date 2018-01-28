@@ -34,11 +34,14 @@ class aacp_Backend {
         add_menu_page('AACP Settings', 'AACP Settings', 'administrator', 'aacp-settings', array($this, 'aacp_settings_page'), 'dashicons-update');
 	}
     
-    public function aacp_settings_page() { ?>
-        <div class="wrap">
-            <h2>ARCHE Augsburg Communication Plugin Settings</h2>
-        </div>
-        <?php
+    public function aacp_settings_page() { 
+        
+        $tabs = array ('ical' => 'Ical Sync', 'export' => 'File Exports');
+        $current = 'ical';
+        
+        include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/aacp-admin-display.php';
+        
+        
     }
     
 }
