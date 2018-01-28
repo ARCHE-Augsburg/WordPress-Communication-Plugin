@@ -190,7 +190,8 @@ class aacp_Core {
 		$backend = new aacp_Backend();
 		
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
-		
+		$this->loader->add_action( 'wp_ajax_jobfilter', $backend, 'exportPrintNewsletter' );
+		$this->loader->add_action( 'wp_ajax_nopriv_jobfilter', $backend, 'exportPrintNewsletter' );
 		
 		$this->loader->run();
 	}

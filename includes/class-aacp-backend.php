@@ -44,4 +44,11 @@ class aacp_Backend {
         
     }
     
+    public function exportPrintNewsletter() {
+        $response = "Rückgabe";
+        echo json_encode( $response );
+        
+        die();
+    }
+    
 }

@@ -25,4 +25,6 @@
             }
         ?>
     </h2>
+    <a class="download-printnl" >Print-Newsletter Vorlage exportieren</a>
+    <div class="response"></div>
 </div>
