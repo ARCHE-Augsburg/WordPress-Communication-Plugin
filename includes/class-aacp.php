@@ -78,7 +78,6 @@ class aacp_Core {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -126,6 +125,11 @@ class aacp_Core {
 		 * The class responsible for the backend ui of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-backend.php';
+
+		/**
+		 * The class responsible for file exports.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-file-exporter.php';
 
 		$this->loader = new aacp_Loader();
 
@@ -190,8 +194,8 @@ class aacp_Core {
 		$backend = new aacp_Backend();
 		
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
-		$this->loader->add_action( 'wp_ajax_jobfilter', $backend, 'exportPrintNewsletter' );
-		$this->loader->add_action( 'wp_ajax_nopriv_jobfilter', $backend, 'exportPrintNewsletter' );
+		$this->loader->add_action( 'wp_ajax_nlexport', $backend, 'exportPrintNewsletter' );
+		$this->loader->add_action( 'wp_ajax_nopriv_nlexport', $backend, 'exportPrintNewsletter' );
 		
 		$this->loader->run();
 	}

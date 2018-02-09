@@ -1,5 +1,5 @@
 (function( $ ) {
-	'use strict';
+	//'use strict';
 
 	/**
 	 * All of the code for your admin-facing JavaScript source
@@ -28,5 +28,48 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+
+	$('.nav-tab-wrapper').on('click', '.nav-tab-ical-sync', function(){
+		$('.tab-ical-sync').removeClass('hidden');
+		$('.tab-file-exports').addClass('hidden');
+		$('.nav-tab-ical-sync').addClass('nav-tab-active');
+		$('.nav-tab-file-exports').removeClass('nav-tab-active');
+		return false;
+	});
+	
+	$('.nav-tab-wrapper').on('click', '.nav-tab-file-exports', function(){
+		$('.tab-ical-sync').addClass('hidden');
+		$('.tab-file-exports').removeClass('hidden');
+		$('.nav-tab-ical-sync').removeClass('nav-tab-active');
+		$('.nav-tab-file-exports').addClass('nav-tab-active');
+		return false;
+	});
+
+	$('#export-print-newsletter').click(function(){
+		ajaxCall();
+	});
+	
+	function ajaxCall() {
+		$.ajax({
+			url: ajaxurl,
+			data: {
+				action : 'nlexport',
+				'month' : 3
+			},
+    		
+    		beforeSend:function(xhr){
+    		    // show load animation
+    		    console.log(xhr);
+    		},
+    		success:function(data){
+    			$('.export-print-newsletter-response').html(data);
+    		},
+    		error: function (data) {
+    		    alert("error");
+            },
+            complete: function(data) {
+            }
+		});
+	}
 
 })( jQuery );
