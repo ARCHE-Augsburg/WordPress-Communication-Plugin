@@ -72,4 +72,13 @@
 		});
 	}
 
+
+	$('.nav-tab-ical-sync').on('click', '#synchronize-calendar', function(){
+		synchronizeCalendar();
+	});
+	
+	function synchronizeCalendar(){
+		
+	}
+
 })( jQuery );

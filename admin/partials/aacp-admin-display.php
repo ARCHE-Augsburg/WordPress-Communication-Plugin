@@ -24,8 +24,11 @@
         <h2>Ical-Synchronisation</h2>
         <p>Die Kalender in <a href="">ChurchTools</a> werden täglich automatisch exportiert, damit die 
         aktuellen Termine auf der Homepage angezeigt werden. Hier kannst du den Status sehen und bei Bedarf manuell synchronisieren.</p>
-        <input type="submit" name="submit" id="submit" class="button button-primary" value="Jetzt synchronisieren">
-        
+        <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
+        <h3>Letzte Synchronisation</h3>
+        <?php 
+            include (dirname(__DIR__)).'/../lib/ical/aacp-ical-sync.php';
+        ?>
     </div>
     <div class="tab-file-exports hidden">
         <h2>Dateiexporte</h2>
