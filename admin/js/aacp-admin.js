@@ -73,12 +73,44 @@
 	}
 
 
-	$('.nav-tab-ical-sync').on('click', '#synchronize-calendar', function(){
+	$('.tab-ical-sync').on('click', '#synchronize-calendar', function(){
 		synchronizeCalendar();
 	});
 	
 	function synchronizeCalendar(){
+		var syncScriptUrl = 'https://termine.arche-augsburg.de/icalsync.php';
+		var calendarRefreshUrl = 'https://arche-augsburg.de/kalendar';
 		
+		$.ajax({
+			url: syncScriptUrl,
+    		beforeSend:function(xhr){
+    		},
+    		success:function(data){
+    		},
+    		error: function (data) {
+    		    alert("Error while syncronizing.");
+            },
+            complete: function(data) {
+            }
+		});
+		
+		$.ajax({
+			url: calendarRefreshUrl,
+			data: {
+				'nocache' : 'true'
+			},
+    		beforeSend:function(xhr){
+    		},
+    		success:function(data){
+    		},
+    		error: function (data) {
+    		    alert("Error while refreshing.");
+            },
+            complete: function(data) {
+            }
+		});
+		
+		location.reload(true);
 	}
 
 })( jQuery );
