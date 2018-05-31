@@ -36,14 +36,17 @@ class aacp_Backend {
         if( ! empty( $_POST['month'] ) &&  $_POST['month'] != '') {
             $month= $_POST['month'];
         }
-        
         $fileExporter = new aacp_FileExporter();
         $exportPath = $fileExporter->exportNewsletter( $month );
-        
         $response = $exportPath;
         echo json_encode( $response );
-        
         wp_die();
     }
     
+    public function synchronizeCalendar(){
+        $synchronizer = new aacp_IcalSynchronizer();
+        $response = $synchronizer->synchronize();
+        echo json_encode($response);
+        wp_die();
+    }
 }

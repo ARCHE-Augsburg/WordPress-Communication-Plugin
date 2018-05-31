@@ -131,8 +131,12 @@ class aacp_Core {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-file-exporter.php';
 
-		$this->loader = new aacp_Loader();
+		/**
+		 * The class responsible for ical synchronization.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/ical/aacp-ical-syncronizer.php';
 
+		$this->loader = new aacp_Loader();
 	}
 
 	/**
@@ -194,8 +198,8 @@ class aacp_Core {
 		$backend = new aacp_Backend();
 		
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
-		$this->loader->add_action( 'wp_ajax_nlexport', $backend, 'exportPrintNewsletter' );
-		$this->loader->add_action( 'wp_ajax_nopriv_nlexport', $backend, 'exportPrintNewsletter' );
+		$this->loader->add_action( 'wp_ajax_newsletterexport', $backend, 'exportPrintNewsletter' );
+		$this->loader->add_action( 'wp_ajax_icalsync', $backend, 'synchronizeCalendar' );
 		
 		$this->loader->run();
 	}

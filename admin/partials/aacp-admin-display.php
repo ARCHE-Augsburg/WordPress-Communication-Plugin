@@ -26,9 +26,12 @@
         aktuellen Termine auf der Homepage angezeigt werden. Hier kannst du den Status sehen und bei Bedarf manuell synchronisieren.</p>
         <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
         <h3>Letzte Synchronisation</h3>
-        <?php 
-            include (dirname(__DIR__)).'/../lib/ical/aacp-ical-sync.php';
-        ?>
+        <div class="sync-status">
+            <?php 
+                $synchronizer = new aacp_IcalSynchronizer();
+                $synchronizer->evaluateLogFile();
+            ?>
+        </div>
     </div>
     <div class="tab-file-exports hidden">
         <h2>Dateiexporte</h2>

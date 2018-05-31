@@ -53,19 +53,17 @@
 		$.ajax({
 			url: ajaxurl,
 			data: {
-				action : 'nlexport',
+				'action' : 'newsletterexport',
 				'month' : 3
 			},
-    		
     		beforeSend:function(xhr){
-    		    // show load animation
-    		    console.log(xhr);
+    		    $('.sync-status').html('<img src="/wp-admin/images/loading.gif" />'); 
     		},
     		success:function(data){
     			$('.export-print-newsletter-response').html(data);
     		},
     		error: function (data) {
-    		    alert("error");
+    		    alert("Ein Fehler ist aufgetreten.");
             },
             complete: function(data) {
             }
@@ -78,39 +76,27 @@
 	});
 	
 	function synchronizeCalendar(){
-		var syncScriptUrl = 'https://termine.arche-augsburg.de/icalsync.php';
-		var calendarRefreshUrl = 'https://arche-augsburg.de/kalendar';
-		
 		$.ajax({
-			url: syncScriptUrl,
-    		beforeSend:function(xhr){
-    		},
-    		success:function(data){
-    		},
-    		error: function (data) {
-    		    alert("Error while syncronizing.");
-            },
-            complete: function(data) {
-            }
-		});
-		
-		$.ajax({
-			url: calendarRefreshUrl,
+			url: ajaxurl,
 			data: {
-				'nocache' : 'true'
+				'action': 'icalsync',
+				'synchronize': 'true'
 			},
     		beforeSend:function(xhr){
+    		    $('.sync-status').html('<img src="/wp-admin/images/loading.gif" />');  
     		},
     		success:function(data){
+    			$('.sync-status').html(data);
+    			console.log(data);
     		},
     		error: function (data) {
-    		    alert("Error while refreshing.");
+    		    alert("Ein Fehler ist aufgetreten.");
             },
             complete: function(data) {
             }
 		});
 		
-		location.reload(true);
+		//location.reload(true);
 	}
 
 })( jQuery );
