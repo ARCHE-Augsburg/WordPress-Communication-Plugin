@@ -95,8 +95,6 @@
             complete: function(data) {
             }
 		});
-		
-		//location.reload(true);
 	}
 
 })( jQuery );

@@ -53,22 +53,24 @@ class aacp_IcalSynchronizer {
 	private function triggerSyncScript() {
 		$options = array(
 			CURLOPT_URL => $this->syncScriptUrl,
-			CURLOPT_RETURNTRANSFER => false,
+			CURLOPT_RETURNTRANSFER => true,
 		);
 	
 		$curlHandle = curl_init();
 		curl_setopt_array($curlHandle, $options);
+		curl_exec($curlHandle);
 		curl_close($curlHandle);
 	}
 	
 	private function triggerCalendarRefetch(){
 		$options = array(
 			CURLOPT_URL => $this->calendarUrl,
-			CURLOPT_RETURNTRANSFER => false,
+			CURLOPT_RETURNTRANSFER => true,
 		);
 	
 		$curlHandle = curl_init();
 		curl_setopt_array($curlHandle, $options);
+		curl_exec($curlHandle);
 		curl_close($curlHandle);
 	}
 }
