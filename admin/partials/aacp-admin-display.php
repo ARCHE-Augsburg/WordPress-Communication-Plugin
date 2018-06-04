@@ -22,16 +22,25 @@
     </h2>
     <div class="tab-ical-sync">
         <h2>Ical-Synchronisation</h2>
-        <p>Die Kalender in <a href="">ChurchTools</a> werden täglich automatisch exportiert, damit die 
-        aktuellen Termine auf der Homepage angezeigt werden. Hier kannst du den Status sehen und bei Bedarf manuell synchronisieren.</p>
-        <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
-        <h3>Letzte Synchronisation</h3>
-        <div class="sync-status">
+        <h3>ChurchTools Kalender .ics export</h3>
+        <p>Die Kalender in ChurchTools werden stündlich exportiert.</p>
+        <div class="export-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
-                $synchronizer->evaluateLogFile();
+                echo $synchronizer->evaluateLogFile();
             ?>
         </div>
+        <h3>Einlesen der .ics exporte auf der Homepage</h3>
+        <p>Die Homepage liest die exportierten Dateien alle 24 Stunden neu ein.</p>
+        <div class="cache-status">
+            <?php 
+                $synchronizer = new aacp_IcalSynchronizer();
+                echo $synchronizer->evaluateCacheFiles();
+            ?>
+        </div>
+        <h3>Manuelle Synchronisation</h3>
+        <p>Hier kann die Synchronisation (erst der Export, dann das Einlesen auf der Homepage) manuell ausgeführt werden.</p>
+        <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
     </div>
     <div class="tab-file-exports hidden">
         <h2>Dateiexporte</h2>

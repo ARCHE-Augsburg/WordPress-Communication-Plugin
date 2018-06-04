@@ -57,7 +57,7 @@
 				'month' : 3
 			},
     		beforeSend:function(xhr){
-    		    $('.sync-status').html('<img src="/wp-admin/images/loading.gif" />'); 
+    		    $('.export-status').html('<img src="/wp-admin/images/loading.gif" />'); 
     		},
     		success:function(data){
     			$('.export-print-newsletter-response').html(data);
@@ -66,7 +66,8 @@
     		    alert("Ein Fehler ist aufgetreten.");
             },
             complete: function(data) {
-            }
+            },
+            dataType:"json"
 		});
 	}
 
@@ -78,16 +79,19 @@
 	function synchronizeCalendar(){
 		$.ajax({
 			url: ajaxurl,
+			type: "POST",
 			data: {
 				'action': 'icalsync',
 				'synchronize': 'true'
 			},
+            dataType:"json",
     		beforeSend:function(xhr){
-    		    $('.sync-status').html('<img src="/wp-admin/images/loading.gif" />');  
+    		    $('.export-status').html('<img src="/wp-admin/images/loading.gif" />');
+    		    $('.cache-status').html('<img src="/wp-admin/images/loading.gif" />'); 
     		},
     		success:function(data){
-    			$('.sync-status').html(data);
-    			console.log(data);
+    			$('.export-status').html(data[0]);
+    			$('.cache-status').html(data[1]);
     		},
     		error: function (data) {
     		    alert("Ein Fehler ist aufgetreten.");
