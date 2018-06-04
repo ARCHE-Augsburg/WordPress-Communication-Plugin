@@ -2,17 +2,19 @@
 
 class aacp_IcalSynchronizer {
 
-	protected $logFileUrl;
-	protected $syncScriptUrl;
-	protected $calendarUrl;
+	private $logFileUrl;
+	private $syncScriptUrl;
+	private $calendarUrl;
 	
 	public function __construct() {
 		$this->logFileUrl = "https://termine.arche-augsburg.de/icalsync.log";
 		$this->syncScriptUrl = "https://termine.arche-augsburg.de/icalsync.php";
-		$this->calendarUrl = "https://arche-augsburg.de/kalender?nocache=true";
+		$this->calendarUrl = "https://arche-augsburg.de/kalender";
 	}
 
 	public function evaluateLogFile() {
+		$response;
+		
 		$options = array(
 			CURLOPT_URL => $this->logFileUrl,
 			CURLOPT_RETURNTRANSFER => true,
@@ -31,23 +33,49 @@ class aacp_IcalSynchronizer {
 			$syncInfoFields = explode(",", $syncInfo);
 			
 			if ($syncInfoFields[2] == "OK") {
-				echo "<span class='dashicons dashicons-yes' style='color: green'></span>";
+				$response .= "<span class='dashicons dashicons-yes' style='color: green'></span>";
 			}
 			else {
-				echo "<span class='dashicons dashicons-no-alt' style='color: red'></span>";
+				$response .= "<span class='dashicons dashicons-no-alt' style='color: red'></span>";
 			}
 			
 			$timestampTime = strtotime($syncInfoFields[1]);
 			$friendlytime = date("d.m.Y, H:i", $timestampTime);
 			
-			echo $syncInfoFields[0].", ".$friendlytime.", ".$syncInfoFields[2].", ".$syncInfoFields[3]."<br />";
+			$response .= $syncInfoFields[0].", ".$friendlytime.", ".$syncInfoFields[2].", ".$syncInfoFields[3]."<br />";
 		}
+		
+		return $response;
+	}
+	
+	public function evaluateCacheFiles(){
+		$response;
+		
+		$cacheDirectory = wp_upload_dir()['path']."/ical-events-cache/";
+		
+		if ( is_dir ( $cacheDirectory ))
+		{
+		    if ( $handle = opendir($cacheDirectory) )
+		    {
+		        while (($file = readdir($handle)) !== false)
+		        {
+		        	if(substr($file, -strlen(".ics"))===".ics")
+		        	{
+			            $response .=  $file.", ";
+			            $response .=  date("d.m.Y, H:i", filemtime($cacheDirectory.$file));
+			            $response .=  "<br />";
+		        	}
+		        }
+		        closedir($handle);
+		    }
+		}
+		
+		return $response;
 	}
 	
 	public function synchronize() {
 		$this->triggerSyncScript();
 		$this->triggerCalendarRefetch();
-		return $this->evaluateLogFile();
 	}
 	
 	private function triggerSyncScript() {
@@ -63,8 +91,14 @@ class aacp_IcalSynchronizer {
 	}
 	
 	private function triggerCalendarRefetch(){
+		$parameter = array(
+			"nocache" => "true"
+		);
+		
+		$getParameter = http_build_query($parameter);
+		
 		$options = array(
-			CURLOPT_URL => $this->calendarUrl,
+			CURLOPT_URL => $this->calendarUrl."?".$getParameter,
 			CURLOPT_RETURNTRANSFER => true,
 		);
 	

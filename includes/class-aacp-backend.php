@@ -23,7 +23,11 @@
 class aacp_Backend {
 
 	public function get_aacp_backend() {
-        add_menu_page('AACP Settings', 'AACP Settings', 'administrator', 'aacp-settings', array($this, 'aacp_settings_page'), 'dashicons-update');
+	    // The menu shall be shown to users in role 'editor' and 'administrator'.
+	    // I don't know how to manage this other than using this capability, which
+	    // is used for both roles.
+	    $capability = 'moderate_comments'; 
+        add_menu_page('AACP Settings', 'AACP Settings', $capability, 'aacp-settings', array($this, 'aacp_settings_page'), 'dashicons-update');
 	}
     
     public function aacp_settings_page() { 
@@ -45,7 +49,10 @@ class aacp_Backend {
     
     public function synchronizeCalendar(){
         $synchronizer = new aacp_IcalSynchronizer();
-        $response = $synchronizer->synchronize();
+        $synchronizer->synchronize();
+        $response = array();
+        $response[] = $synchronizer->evaluateLogFile();
+        $response[] = $synchronizer->evaluateCacheFiles();
         echo json_encode($response);
         wp_die();
     }
