@@ -135,6 +135,11 @@ class aacp_Core {
 		 * The class responsible for ical synchronization.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/ical/aacp-ical-syncronizer.php';
+		
+		/**
+		 * The class responsible for sermon file validation.
+		 */
+		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/podcast/aacp-file-validator.php';
 
 		$this->loader = new aacp_Loader();
 	}
