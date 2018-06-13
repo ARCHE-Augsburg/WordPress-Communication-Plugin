@@ -125,6 +125,11 @@ class aacp_Core {
 		 * The class responsible for the backend ui of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-backend.php';
+		
+		/**
+		 * The class responsible for the cron job stuff.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-cronjobmanager.php';
 
 		/**
 		 * The class responsible for file exports.
@@ -199,12 +204,17 @@ class aacp_Core {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		
+		// Admin menu and ajax calls ToDo: Seperate concerns
 		$backend = new aacp_Backend();
-		
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
 		$this->loader->add_action( 'wp_ajax_newsletterexport', $backend, 'exportPrintNewsletter' );
 		$this->loader->add_action( 'wp_ajax_icalsync', $backend, 'synchronizeCalendar' );
+		
+		// Cron jobs
+		$cronJobManager = new aacp_CronJobManger();
+		$this->loader->add_action( 'wp', $cronJobManager, 'startCronJobPodcastFileValidation' );
+		
+		$this->loader->add_filter( 'cron_schedules', $cronJobManager, 'cronAddMinute' );
 		
 		$this->loader->run();
 	}

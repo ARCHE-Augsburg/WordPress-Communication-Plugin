@@ -2,7 +2,7 @@
 
 class aacp_FileValidator {
 
-    public function validateAndSendEmail() {
+    public function validateAndGetBadFiles() {
         $response;
         $incorrectFiles = array();
         $incorrectFiles = $this->getIncorrectFiles();
@@ -31,6 +31,17 @@ class aacp_FileValidator {
         }
         
         return $sermons;
+    }
+    
+    public function validateAndSendEmail() {
+        $incorrectFiles = array();
+        $incorrectFiles = $this->getIncorrectFiles();
+        
+    	$recepients = 'mariusmueller1988@web.de';
+    	$subject = 'Hello from your Cron Job';
+    	$message = 'This is a test mail sent by WordPress automatically as per your schedule.';
+    	 
+    	mail($recepients, $subject, $message);
     }
 }
 

@@ -63,8 +63,8 @@
         <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
         <div class="export-status">
             <?php 
-                $synchronizer = new aacp_FileValidator();
-                echo $synchronizer->validateAndSendEmail();
+                $fileValidator = new aacp_FileValidator();
+                echo $fileValidator->validateAndGetBadFiles();
             ?>
         </div>
     </div>
