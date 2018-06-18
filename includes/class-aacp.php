@@ -132,6 +132,11 @@ class aacp_Core {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-cronjobmanager.php';
 
 		/**
+		 * The class responsible for configuration.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-configuration.php';
+
+		/**
 		 * The class responsible for file exports.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-file-exporter.php';
@@ -214,7 +219,10 @@ class aacp_Core {
 		$cronJobManager = new aacp_CronJobManger();
 		$this->loader->add_action( 'wp', $cronJobManager, 'startCronJobPodcastFileValidation' );
 		
-		$this->loader->add_filter( 'cron_schedules', $cronJobManager, 'cronAddEveryMinuteInterval' );
+		// Configuration
+		$configutation = new aacp_Configuration();
+		$this->loader->add_filter( 'phpmailer_init', $configutation, 'send_smtp_email' );
+		$this->loader->add_filter( 'cron_schedules', $configutation, 'cron_add_every_minute_interval' );
 		
 		$this->loader->run();
 	}

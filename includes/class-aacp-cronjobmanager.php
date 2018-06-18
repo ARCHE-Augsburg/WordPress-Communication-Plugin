@@ -27,13 +27,6 @@ class aacp_CronJobManger {
 		wp_clear_scheduled_hook($jobName);
 	}
 	
-	public function cronAddEveryMinuteInterval( $schedules ) {
-		$schedules['everyminute'] = array(
-		    'interval' => 60,
-		    'display' => __( 'Once Every Minute' )
-		);
-		return $schedules;
-	}
 }
 
 ?>
