@@ -44,10 +44,38 @@
 		 
 		 // Parse template file
 		 // Get export data
+		 //$events = GetEvents();
+		 
 		 // Generate export file in export-data directory
 		 // return the path
 		 
-		 return "test";
+		 
+		 return GetEvents ();
+		 //return "test";
 	}
-     
- }
+	
+	private function GetEvents () {
+		$events = array();
+
+		$argu = array(
+            'post_type' => 'events',
+        );
+
+		$my_query = new WP_Query($argu);
+
+    	if($my_query->have_posts()) {
+    		while ($my_query->have_posts()) 
+    		{
+            $the_query->the_post();
+            
+			$event = array();
+            $event['permalink'] = the_permalink();
+            $event['post_title'] = get_the_title();
+            
+            array_push($events, $event);
+    		}
+    	}
+		wp_reset_postdata();
+		return $events;
+	}
+}

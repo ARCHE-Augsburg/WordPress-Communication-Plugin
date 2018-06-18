@@ -37,8 +37,8 @@ class aacp_Backend {
     public function exportPrintNewsletter() {
         // Month of the newsletter
         $month;
-        if( ! empty( $_POST['month'] ) &&  $_POST['month'] != '') {
-            $month= $_POST['month'];
+        if( !empty( $_POST['month'] ) && $_POST['month'] != '') {
+            $month = $_POST['month'];
         }
         $fileExporter = new aacp_FileExporter();
         $exportPath = $fileExporter->exportNewsletter( $month );
