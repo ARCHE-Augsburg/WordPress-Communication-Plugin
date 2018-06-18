@@ -214,7 +214,7 @@ class aacp_Core {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		// Admin menu and ajax calls ToDo: Seperate concerns
+		// Admin menu
 		$backend = new aacp_Backend();
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
 		
