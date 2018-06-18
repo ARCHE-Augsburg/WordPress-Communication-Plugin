@@ -12,7 +12,7 @@ class aacp_IcalSynchronizer {
 		$this->calendarUrl = "https://arche-augsburg.de/kalender";
 	}
 
-	public function evaluateLogFile() {
+	public function evaluate_log_file() {
 		$response;
 		
 		$options = array(
@@ -48,7 +48,7 @@ class aacp_IcalSynchronizer {
 		return $response;
 	}
 	
-	public function evaluateCacheFiles(){
+	public function evaluate_cache_files(){
 		$response;
 		
 		$cacheDirectory = wp_upload_dir()['path']."/ical-events-cache/";
@@ -74,11 +74,11 @@ class aacp_IcalSynchronizer {
 	}
 	
 	public function synchronize() {
-		$this->triggerSyncScript();
-		$this->triggerCalendarRefetch();
+		$this->trigger_sync_script();
+		$this->trigger_calendar_refetch();
 	}
 	
-	private function triggerSyncScript() {
+	private function trigger_sync_script() {
 		$options = array(
 			CURLOPT_URL => $this->syncScriptUrl,
 			CURLOPT_RETURNTRANSFER => true,
@@ -90,7 +90,7 @@ class aacp_IcalSynchronizer {
 		curl_close($curlHandle);
 	}
 	
-	private function triggerCalendarRefetch(){
+	private function trigger_calendar_refetch(){
 		$parameter = array(
 			"nocache" => "true"
 		);

@@ -28,7 +28,7 @@
         <div class="export-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
-                echo $synchronizer->evaluateLogFile();
+                echo $synchronizer->evaluate_log_file();
             ?>
         </div>
         <h3>Einlesen der .ics exporte auf der Homepage</h3>
@@ -36,7 +36,7 @@
         <div class="cache-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
-                echo $synchronizer->evaluateCacheFiles();
+                echo $synchronizer->evaluate_cache_files();
             ?>
         </div>
         <h3>Manuelle Synchronisation</h3>
@@ -64,7 +64,7 @@
         <div class="export-status">
             <?php 
                 $fileValidator = new aacp_FileValidator();
-                echo $fileValidator->validateAndGetBadFiles();
+                echo $fileValidator->validate_and_get_bad_files();
             ?>
         </div>
     </div>

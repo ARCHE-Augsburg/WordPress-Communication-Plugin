@@ -2,10 +2,10 @@
 
 class aacp_FileValidator {
 
-    public function validateAndGetBadFiles() {
+    public function validate_and_get_bad_files() {
         $response;
         $incorrectFiles = array();
-        $incorrectFiles = $this->getIncorrectFiles();
+        $incorrectFiles = $this->get_incorrect_files();
         
         if(count($incorrectFiles) > 0) {
             foreach($incorrectFiles as $file) {
@@ -17,7 +17,7 @@ class aacp_FileValidator {
         return $response;
     }
  
-    private function getIncorrectFiles() {
+    private function get_incorrect_files() {
         $sermonDirectory = get_home_path().'../live_podcast/*/*.mp3';
         $sermons = array ();
         
@@ -33,9 +33,9 @@ class aacp_FileValidator {
         return $sermons;
     }
     
-    public function validateAndSendEmail() {
+    public function validate_and_send_email() {
         $incorrectFiles = array();
-        $incorrectFiles = $this->getIncorrectFiles();
+        $incorrectFiles = $this->get_incorrect_files();
         
     	$recepients = 'mariusmueller1988@web.de';
     	$subject = 'Hello from your Cron Job';

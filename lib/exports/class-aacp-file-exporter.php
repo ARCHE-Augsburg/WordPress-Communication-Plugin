@@ -40,7 +40,7 @@
 	 * @param    string             $templateFile      The template file defining the styles to apply
 	 * @returns  string                                  The path to exported file
 	 */
-	public function exportNewsletter ( $month ) {
+	public function export_newsletter ( $month ) {
 		 
 		 // Parse template file
 		 // Get export data
@@ -50,11 +50,11 @@
 		 // return the path
 		 
 		 
-		 return GetEvents ();
+		 return get_events ();
 		 //return "test";
 	}
 	
-	private function GetEvents () {
+	private function get_events () {
 		$events = array();
 
 		$argu = array(
