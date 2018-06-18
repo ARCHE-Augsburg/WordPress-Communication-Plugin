@@ -214,7 +214,7 @@ class aacp_Core {
 		$cronJobManager = new aacp_CronJobManger();
 		$this->loader->add_action( 'wp', $cronJobManager, 'startCronJobPodcastFileValidation' );
 		
-		$this->loader->add_filter( 'cron_schedules', $cronJobManager, 'cronAddMinute' );
+		$this->loader->add_filter( 'cron_schedules', $cronJobManager, 'cronAddEveryMinuteInterval' );
 		
 		$this->loader->run();
 	}

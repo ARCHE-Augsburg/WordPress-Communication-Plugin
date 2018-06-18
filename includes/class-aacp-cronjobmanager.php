@@ -20,16 +20,14 @@ class aacp_CronJobManger {
 	}
 	
 	public function unscheduleCronJobPodcastFileValidation(){
-		unscheduleCronJob('podcastFileValidationJob');
+		$this->unscheduleCronJob('podcastFileValidationJob');
 	}
 	
     private function unscheduleCronJob($jobName) {
-		$timestamp = wp_next_scheduled ($jobName);
-		wp_unschedule_event ($timestamp, $jobName);
+		wp_clear_scheduled_hook($jobName);
 	}
 	
-	function cronAddMinute( $schedules ) {
-		// Adds once every minute to the existing schedules.
+	public function cronAddEveryMinuteInterval( $schedules ) {
 		$schedules['everyminute'] = array(
 		    'interval' => 60,
 		    'display' => __( 'Once Every Minute' )
