@@ -221,7 +221,7 @@ class aacp_Core {
 		
 		// Configuration
 		$configutation = new aacp_Configuration();
-		$this->loader->add_filter( 'phpmailer_init', $configutation, 'send_smtp_email' );
+		$this->loader->add_action( 'phpmailer_init', $configutation, 'send_smtp_email' );
 		$this->loader->add_filter( 'cron_schedules', $configutation, 'cron_add_every_minute_interval' );
 		
 		$this->loader->run();
