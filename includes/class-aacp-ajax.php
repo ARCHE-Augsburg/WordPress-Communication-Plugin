@@ -19,7 +19,7 @@ class aacp_Ajax {
         $synchronizer = new aacp_IcalSynchronizer();
         $synchronizer->synchronize();
         $response = array();
-        $response[] = $synchronizer->evaluate_log_dile();
+        $response[] = $synchronizer->evaluate_log_file();
         $response[] = $synchronizer->evaluate_cache_files();
         echo json_encode($response);
         wp_die();

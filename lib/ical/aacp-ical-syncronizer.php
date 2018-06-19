@@ -9,7 +9,7 @@ class aacp_IcalSynchronizer {
 	public function __construct() {
 		$this->logFileUrl = "https://termine.arche-augsburg.de/icalsync.log";
 		$this->syncScriptUrl = "https://termine.arche-augsburg.de/icalsync.php";
-		$this->calendarUrl = "https://arche-augsburg.de/kalender/";
+		$this->calendarUrl = get_site_url() . "/kalender";
 	}
 
 	public function evaluate_log_file() {
@@ -49,20 +49,20 @@ class aacp_IcalSynchronizer {
 	}
 	
 	public function evaluate_cache_files(){
-		$response;
+		$response = "";
 		
 		$cacheDirectory = wp_upload_dir()['path']."/ical-events-cache/";
 		
-		if ( is_dir ( $cacheDirectory ))
+		if ( is_dir ( $cacheDirectory ) )
 		{
-		    if ( $handle = opendir($cacheDirectory) )
+		    if ( $handle = opendir ( $cacheDirectory ) )
 		    {
-		        while (($file = readdir($handle)) !== false)
+		        while ( ( $file = readdir ( $handle ) ) !== false)
 		        {
-		        	if(substr($file, -strlen(".ics"))===".ics")
+		        	if(substr( $file, -strlen( ".ics" ) ) === ".ics" )
 		        	{
-			            $response .=  $file.", ";
-			            $response .=  date("d.m.Y, H:i", filemtime($cacheDirectory.$file));
+			            $response .=  $file . ", ";
+			            $response .=  date( "d.m.Y, H:i", filemtime( $cacheDirectory.$file ) );
 			            $response .=  "<br />";
 		        	}
 		        }
@@ -98,8 +98,9 @@ class aacp_IcalSynchronizer {
 		$getParameter = http_build_query($parameter);
 		
 		$options = array(
-			CURLOPT_URL => $this->calendarUrl."?".$getParameter,
+			CURLOPT_URL => $this->calendarUrl."/?".$getParameter,
 			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true,
 		);
 	
 		$curlHandle = curl_init();
