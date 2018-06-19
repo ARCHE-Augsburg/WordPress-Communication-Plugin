@@ -233,8 +233,9 @@ class aacp_Core {
 		// $this->loader->add_action( 'wp', $cronJobManager, 'start_cron_job_podcast_file_validation' );
 		
 		// Configuration
-		$configutation = new aacp_Configuration();
-		$this->loader->add_filter( 'cron_schedules', $configutation, 'cron_add_every_minute_interval' );
+		$configuration = new aacp_Configuration();
+		$this->loader->add_filter( 'cron_schedules', $configuration, 'cron_add_every_minute_interval' );
+		$this->loader->add_filter( 'cron_request', $configuration, 'http_basic_cron_request' );
 		
 		$this->loader->run();
 	}
