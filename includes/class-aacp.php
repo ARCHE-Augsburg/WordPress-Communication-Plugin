@@ -230,11 +230,10 @@ class aacp_Core {
 		
 		// Cron jobs
 		$cronJobManager = new aacp_CronJobManger();
-		$this->loader->add_action( 'wp', $cronJobManager, 'start_cron_job_podcast_file_validation' );
+		// $this->loader->add_action( 'wp', $cronJobManager, 'start_cron_job_podcast_file_validation' );
 		
 		// Configuration
 		$configutation = new aacp_Configuration();
-		$this->loader->add_action( 'phpmailer_init', $configutation, 'send_smtp_email' );
 		$this->loader->add_filter( 'cron_schedules', $configutation, 'cron_add_every_minute_interval' );
 		
 		$this->loader->run();
