@@ -61,7 +61,7 @@
     <div class="tab-podcast-file-validation hidden">
         <h2>Podcast Dateien</h2>
         <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
-        <div class="export-status">
+        <div class="">
             <?php 
                 $fileValidator = new aacp_FileValidator();
                 echo $fileValidator->validate_and_get_bad_files();
