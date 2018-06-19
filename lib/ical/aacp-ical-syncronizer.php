@@ -9,7 +9,7 @@ class aacp_IcalSynchronizer {
 	public function __construct() {
 		$this->logFileUrl = "https://termine.arche-augsburg.de/icalsync.log";
 		$this->syncScriptUrl = "https://termine.arche-augsburg.de/icalsync.php";
-		$this->calendarUrl = "https://arche-augsburg.de/kalender";
+		$this->calendarUrl = "https://arche-augsburg.de/kalender/";
 	}
 
 	public function evaluate_log_file() {
