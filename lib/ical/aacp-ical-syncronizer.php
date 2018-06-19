@@ -33,10 +33,10 @@ class aacp_IcalSynchronizer {
 			$syncInfoFields = explode(",", $syncInfo);
 			
 			if ($syncInfoFields[2] == "OK") {
-				$response .= "<span class='dashicons dashicons-yes' style='color: green'></span>";
+				$response .= AACP_SUCCESS_ICON;
 			}
 			else {
-				$response .= "<span class='dashicons dashicons-no-alt' style='color: red'></span>";
+				$response .= AACP_FAULURE_ICON;
 			}
 			
 			$timestampTime = strtotime($syncInfoFields[1]);

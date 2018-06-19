@@ -9,9 +9,12 @@ class aacp_FileValidator {
         
         if(count($incorrectFiles) > 0) {
             foreach($incorrectFiles as $file) {
-                $response .= $file;
+                $response .= AACP_FAILURE_ICON . $file;
                 $response .=  "<br />";
             }
+        }
+        else {
+            $response = AACP_SUCCESS_ICON . "Alle Dateien sind korrekt benannt";
         }
         
         return $response;
@@ -19,7 +22,7 @@ class aacp_FileValidator {
  
     private function get_incorrect_files() {
         $sermonDirectory = get_home_path().'../live_podcast/*/*.mp3';
-        $sermons = array ();
+        $sermons = array();
         
         foreach(glob($sermonDirectory) as $file) {
         	
