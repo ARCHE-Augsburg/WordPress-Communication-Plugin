@@ -40,14 +40,42 @@
 	 * @param    string             $templateFile      The template file defining the styles to apply
 	 * @returns  string                                  The path to exported file
 	 */
-	public function exportNewsletter ( $month ) {
+	public function export_newsletter ( $month ) {
 		 
 		 // Parse template file
 		 // Get export data
+		 //$events = GetEvents();
+		 
 		 // Generate export file in export-data directory
 		 // return the path
 		 
-		 return "test";
+		 
+		 return get_events ();
+		 //return "test";
 	}
-     
- }
+	
+	private function get_events () {
+		$events = array();
+
+		$argu = array(
+            'post_type' => 'events',
+        );
+
+		$my_query = new WP_Query($argu);
+
+    	if($my_query->have_posts()) {
+    		while ($my_query->have_posts()) 
+    		{
+            $the_query->the_post();
+            
+			$event = array();
+            $event['permalink'] = the_permalink();
+            $event['post_title'] = get_the_title();
+            
+            array_push($events, $event);
+    		}
+    	}
+		wp_reset_postdata();
+		return $events;
+	}
+}

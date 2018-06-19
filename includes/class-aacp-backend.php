@@ -33,27 +33,4 @@ class aacp_Backend {
     public function aacp_settings_page() { 
         include plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/aacp-admin-display.php';
     }
-    
-    public function exportPrintNewsletter() {
-        // Month of the newsletter
-        $month;
-        if( ! empty( $_POST['month'] ) &&  $_POST['month'] != '') {
-            $month= $_POST['month'];
-        }
-        $fileExporter = new aacp_FileExporter();
-        $exportPath = $fileExporter->exportNewsletter( $month );
-        $response = $exportPath;
-        echo json_encode( $response );
-        wp_die();
-    }
-    
-    public function synchronizeCalendar(){
-        $synchronizer = new aacp_IcalSynchronizer();
-        $synchronizer->synchronize();
-        $response = array();
-        $response[] = $synchronizer->evaluateLogFile();
-        $response[] = $synchronizer->evaluateCacheFiles();
-        echo json_encode($response);
-        wp_die();
-    }
 }

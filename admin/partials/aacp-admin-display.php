@@ -19,6 +19,7 @@
     <h2 class="nav-tab-wrapper">
         <a class="nav-tab nav-tab-ical-sync nav-tab-active" href="#ical-sync">Ical Sync</a>
         <a class="nav-tab nav-tab-file-exports" href="#file-exports">Dateiexporte</a>
+        <a class="nav-tab nav-tab-podcast-file-validation" href="#podcast-file-validation">Podcast Dateien</a>
     </h2>
     <div class="tab-ical-sync">
         <h2>Ical-Synchronisation</h2>
@@ -27,7 +28,7 @@
         <div class="export-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
-                echo $synchronizer->evaluateLogFile();
+                echo $synchronizer->evaluate_log_file();
             ?>
         </div>
         <h3>Einlesen der .ics exporte auf der Homepage</h3>
@@ -35,7 +36,7 @@
         <div class="cache-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
-                echo $synchronizer->evaluateCacheFiles();
+                echo $synchronizer->evaluate_cache_files();
             ?>
         </div>
         <h3>Manuelle Synchronisation</h3>
@@ -56,7 +57,15 @@
         <p>Die Präsentation läuft jeden Sonntag vor den Gottesdiensten.<p>
         
         <input type="submit" name="submit" id="submit" class="button button-primary" value="ppp herunterladen">
-        
     </div>
-    
+    <div class="tab-podcast-file-validation hidden">
+        <h2>Podcast Dateien</h2>
+        <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
+        <div class="export-status">
+            <?php 
+                $fileValidator = new aacp_FileValidator();
+                echo $fileValidator->validate_and_get_bad_files();
+            ?>
+        </div>
+    </div>
 </div>

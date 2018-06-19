@@ -9,10 +9,10 @@ class aacp_IcalSynchronizer {
 	public function __construct() {
 		$this->logFileUrl = "https://termine.arche-augsburg.de/icalsync.log";
 		$this->syncScriptUrl = "https://termine.arche-augsburg.de/icalsync.php";
-		$this->calendarUrl = "https://arche-augsburg.de/kalender";
+		$this->calendarUrl = "https://arche-augsburg.de/kalender/";
 	}
 
-	public function evaluateLogFile() {
+	public function evaluate_log_file() {
 		$response;
 		
 		$options = array(
@@ -33,10 +33,10 @@ class aacp_IcalSynchronizer {
 			$syncInfoFields = explode(",", $syncInfo);
 			
 			if ($syncInfoFields[2] == "OK") {
-				$response .= "<span class='dashicons dashicons-yes' style='color: green'></span>";
+				$response .= AACP_SUCCESS_ICON;
 			}
 			else {
-				$response .= "<span class='dashicons dashicons-no-alt' style='color: red'></span>";
+				$response .= AACP_FAULURE_ICON;
 			}
 			
 			$timestampTime = strtotime($syncInfoFields[1]);
@@ -48,7 +48,7 @@ class aacp_IcalSynchronizer {
 		return $response;
 	}
 	
-	public function evaluateCacheFiles(){
+	public function evaluate_cache_files(){
 		$response;
 		
 		$cacheDirectory = wp_upload_dir()['path']."/ical-events-cache/";
@@ -74,11 +74,11 @@ class aacp_IcalSynchronizer {
 	}
 	
 	public function synchronize() {
-		$this->triggerSyncScript();
-		$this->triggerCalendarRefetch();
+		$this->trigger_sync_script();
+		$this->trigger_calendar_refetch();
 	}
 	
-	private function triggerSyncScript() {
+	private function trigger_sync_script() {
 		$options = array(
 			CURLOPT_URL => $this->syncScriptUrl,
 			CURLOPT_RETURNTRANSFER => true,
@@ -90,7 +90,7 @@ class aacp_IcalSynchronizer {
 		curl_close($curlHandle);
 	}
 	
-	private function triggerCalendarRefetch(){
+	private function trigger_calendar_refetch(){
 		$parameter = array(
 			"nocache" => "true"
 		);

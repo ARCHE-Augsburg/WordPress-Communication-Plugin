@@ -125,16 +125,41 @@ class aacp_Core {
 		 * The class responsible for the backend ui of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-backend.php';
+		
+		/**
+		 * The class responsible for ajax.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-ajax.php';
+		
+		/**
+		 * The class responsible for the cron job stuff.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-cronjobmanager.php';
+
+		/**
+		 * The class responsible for configuration.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-configuration.php';
+		
+		/**
+		 * The file holding constants.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/constants.php';
 
 		/**
 		 * The class responsible for file exports.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-file-exporter.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-exporter.php';
 
 		/**
 		 * The class responsible for ical synchronization.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/ical/aacp-ical-syncronizer.php';
+		
+		/**
+		 * The class responsible for sermon file validation.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/podcast/aacp-file-validator.php';
 
 		$this->loader = new aacp_Loader();
 	}
@@ -194,12 +219,22 @@ class aacp_Core {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		
+		// Admin menu
 		$backend = new aacp_Backend();
-		
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
-		$this->loader->add_action( 'wp_ajax_newsletterexport', $backend, 'exportPrintNewsletter' );
-		$this->loader->add_action( 'wp_ajax_icalsync', $backend, 'synchronizeCalendar' );
+		
+		// Ajax
+		$ajax = new aacp_Ajax();
+		$this->loader->add_action( 'wp_ajax_newsletterexport', $ajax, 'export_print_newsletter' );
+		$this->loader->add_action( 'wp_ajax_icalsync', $ajax, 'synchronize_calendar' );
+		
+		// Cron jobs
+		$cronJobManager = new aacp_CronJobManger();
+		// $this->loader->add_action( 'wp', $cronJobManager, 'start_cron_job_podcast_file_validation' );
+		
+		// Configuration
+		$configutation = new aacp_Configuration();
+		$this->loader->add_filter( 'cron_schedules', $configutation, 'cron_add_every_minute_interval' );
 		
 		$this->loader->run();
 	}
