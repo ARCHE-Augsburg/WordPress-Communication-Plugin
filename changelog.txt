@@ -1,5 +1,9 @@
 Changelog:
 
+1.0.1
+- Bugfix calendar refresh
+- Introduce basic sermon file validation
+
 1.0.0
 - Hello World
 - Synchronization of ical
