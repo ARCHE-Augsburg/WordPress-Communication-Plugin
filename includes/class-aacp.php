@@ -140,6 +140,11 @@ class aacp_Core {
 		 * The class responsible for configuration.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-configuration.php';
+		
+		/**
+		 * The file holding constants.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/constants.php';
 
 		/**
 		 * The class responsible for file exports.
@@ -154,7 +159,7 @@ class aacp_Core {
 		/**
 		 * The class responsible for sermon file validation.
 		 */
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/podcast/aacp-file-validator.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/podcast/aacp-file-validator.php';
 
 		$this->loader = new aacp_Loader();
 	}
