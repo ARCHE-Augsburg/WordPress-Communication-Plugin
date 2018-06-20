@@ -68,7 +68,7 @@
             ?>
         </div>
             <?php if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) { ?>
-                 <p>Für die wöchentliche automatische Prüfung wurde keine Emailadresse definiert.</p>   
+                 <p><strong>Für die wöchentliche automatische Prüfung wurde keine Emailadresse definiert.</strong></p>
             <?php } else {?>
                 <p>Es wird auch jede Woche automatisch auf fehlerhaft benannte Dateien geprüft und eine 
                 Benachrichtigungsmail an '<?php echo AA_EMAILADRESSE_PODCAST_VALIDIERUNG; ?>' geschickt.</p>
