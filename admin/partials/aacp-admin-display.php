@@ -16,11 +16,12 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
     <h1>ARCHE Augsburg Communication Plugin</h1>
-    <h2 class="nav-tab-wrapper">
+    <div class="nav-tab-wrapper">
         <a class="nav-tab nav-tab-ical-sync nav-tab-active" href="#ical-sync">Ical Sync</a>
         <a class="nav-tab nav-tab-file-exports" href="#file-exports">Dateiexporte</a>
         <a class="nav-tab nav-tab-podcast-file-validation" href="#podcast-file-validation">Podcast Dateien</a>
-    </h2>
+        <a class="nav-tab nav-tab-online-newsletter" href="#online-newsletter">Online Newsletter</a>
+    </div>
     <div class="tab-ical-sync">
         <h2>Ical-Synchronisation</h2>
         <h3>ChurchTools Kalender .ics export</h3>
@@ -73,5 +74,16 @@
                 <p>Es wird auch jede Woche automatisch auf fehlerhaft benannte Dateien geprüft und eine 
                 Benachrichtigungsmail an '<?php echo AA_EMAILADRESSE_PODCAST_VALIDIERUNG; ?>' geschickt.</p>
             <?php } ?>
+    </div>
+    <div class="tab-online-newsletter hidden">
+        <h3>Mailchimp Bilder upload</h3>
+        <p>Wenn die Zugangsdaten in der config Datei eingetragen sind, wird die erste Grafikdatei eines Events automatisch
+        mit dem click auf "veröffentlichen" in die Mailchimp Mediathek hochgeladen.</p>
+        <p>Status: 
+            <?php
+                $mailchimp_intrgration = new aacp_MailchimpIntegration();
+                echo $mailchimp_intrgration->is_mailchimp_upload_activated();
+            ?>
+        </p>
     </div>
 </div>

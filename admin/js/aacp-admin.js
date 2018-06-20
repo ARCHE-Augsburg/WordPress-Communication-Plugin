@@ -39,6 +39,9 @@
 		$('.nav-tab-podcast-file-validation').removeClass('nav-tab-active');
 		$('.tab-podcast-file-validation').addClass('hidden');
 		
+		$('.nav-tab-online-newsletter').removeClass('nav-tab-active');
+		$('.tab-online-newsletter').addClass('hidden');
+		
 		return false;
 	});
 	
@@ -51,6 +54,9 @@
 		
 		$('.nav-tab-podcast-file-validation').removeClass('nav-tab-active');
 		$('.tab-podcast-file-validation').addClass('hidden');
+		
+		$('.nav-tab-online-newsletter').removeClass('nav-tab-active');
+		$('.tab-online-newsletter').addClass('hidden');
 	
 		return false;
 	});
@@ -64,6 +70,25 @@
 		
 		$('.nav-tab-ical-sync').removeClass('nav-tab-active');
 		$('.tab-ical-sync').addClass('hidden');
+		
+		$('.nav-tab-online-newsletter').removeClass('nav-tab-active');
+		$('.tab-online-newsletter').addClass('hidden');
+		
+		return false;
+	});
+	
+	$('.nav-tab-wrapper').on('click', '.nav-tab-online-newsletter', function(){
+		$('.nav-tab-online-newsletter').addClass('nav-tab-active');
+		$('.tab-online-newsletter').removeClass('hidden');
+		
+		$('.nav-tab-file-exports').removeClass('nav-tab-active');
+		$('.tab-file-exports').addClass('hidden');
+		
+		$('.nav-tab-ical-sync').removeClass('nav-tab-active');
+		$('.tab-ical-sync').addClass('hidden');
+		
+		$('.nav-tab-podcast-file-validation').removeClass('nav-tab-active');
+		$('.tab-podcast-file-validation').addClass('hidden');
 		
 		return false;
 	});
