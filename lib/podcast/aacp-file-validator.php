@@ -36,6 +36,10 @@ class aacp_FileValidator {
     }
     
     public function validate_and_send_email() {
+        if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) {
+            return;
+        }
+        
         $incorrectFiles = $this->get_incorrect_files();
         
         if(count($incorrectFiles) > 0) {

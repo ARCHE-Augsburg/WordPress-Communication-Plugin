@@ -67,5 +67,11 @@
                 echo $fileValidator->validate_and_get_bad_files();
             ?>
         </div>
+            <?php if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) { ?>
+                 <p>Für die wöchentliche automatische Prüfung wurde keine Emailadresse definiert.</p>   
+            <?php } else {?>
+                <p>Es wird auch jede Woche automatisch auf fehlerhaft benannte Dateien geprüft und eine 
+                Benachrichtigungsmail an '<?php echo AA_EMAILADRESSE_PODCAST_VALIDIERUNG; ?>' geschickt.</p>
+            <?php } ?>
     </div>
 </div>
