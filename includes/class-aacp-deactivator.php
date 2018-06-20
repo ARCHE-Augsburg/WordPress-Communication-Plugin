@@ -32,7 +32,7 @@ class aacp_Deactivator {
 	public static function deactivate() {
 		// Deactivate cron jobs
 		$cronJobManager = new aacp_CronJobManger();
-		$cronJobManager->stop_cron_job_podcast_file_validation();
+		$cronJobManager->unschedule_cron_job_podcast_file_validation();
 	}
 
 }

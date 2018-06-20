@@ -229,8 +229,8 @@ class aacp_Core {
 		$this->loader->add_action( 'wp_ajax_icalsync', $ajax, 'synchronize_calendar' );
 		
 		// Cron jobs
-		$cronJobManager = new aacp_CronJobManger();
-		// $this->loader->add_action( 'wp', $cronJobManager, 'start_cron_job_podcast_file_validation' );
+		$fileValidator = new aacp_FileValidator();
+		$this->loader->add_action( 'podcast_file_validation_job', $fileValidator, 'validate_and_send_email' );
 		
 		// Configuration
 		$configutation = new aacp_Configuration();
