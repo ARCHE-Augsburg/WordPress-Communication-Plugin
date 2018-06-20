@@ -239,7 +239,7 @@ class aacp_Core {
 		
 		// Mailchimp integration
 		$mailchimpIntegration = new aacp_MailchimpIntegration();
-		$this->loader->add_action( 'publish_events', $mailchimpIntegration, 'upload_image_to_mailchimp' );
+		$this->loader->add_action( 'publish_event', $mailchimpIntegration, 'upload_image_to_mailchimp' );
 		
 		// Development configuration
 		//$configuration = new aacp_Configuration();
