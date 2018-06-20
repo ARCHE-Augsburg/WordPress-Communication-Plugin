@@ -157,6 +157,11 @@ class aacp_Core {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/ical/aacp-ical-syncronizer.php';
 		
 		/**
+		 * The class responsible for mailchimp integration.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/mailchimp/aacp-mailchimpintegration.php';
+		
+		/**
 		 * The class responsible for sermon file validation.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/podcast/aacp-file-validator.php';
@@ -231,6 +236,10 @@ class aacp_Core {
 		// Cron jobs
 		$fileValidator = new aacp_FileValidator();
 		$this->loader->add_action( 'podcast_file_validation_job', $fileValidator, 'validate_and_send_email' );
+		
+		// Mailchimp integration
+		$mailchimpIntegration = new aacp_MailchimpIntegration();
+		$this->loader->add_action( 'publish_events', $mailchimpIntegration, 'upload_image_to_mailchimp' );
 		
 		// Development configuration
 		//$configuration = new aacp_Configuration();
