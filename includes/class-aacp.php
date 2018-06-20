@@ -159,7 +159,7 @@ class aacp_Core {
 		/**
 		 * The class responsible for mailchimp integration.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/mailchimp/aacp-mailchimpintegration.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/mailchimp/aacp-class-mailchimpintegration.php';
 		
 		/**
 		 * The class responsible for sermon file validation.
@@ -239,7 +239,7 @@ class aacp_Core {
 		
 		// Mailchimp integration
 		$mailchimpIntegration = new aacp_MailchimpIntegration();
-		$this->loader->add_action( 'publish_event', $mailchimpIntegration, 'upload_image_to_mailchimp' );
+		$this->loader->add_action( 'publish_events', $mailchimpIntegration, 'upload_image_to_mailchimp' );
 		
 		// Development configuration
 		//$configuration = new aacp_Configuration();
