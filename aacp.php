@@ -9,7 +9,7 @@
  * Plugin Name:       ARCHE Augsburg Communication Plugin
  * Plugin URI:        https://arche-augsburg.de
  * Description:       For communication issues
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Christian Doernen, Michael Machus
  * Author URI:        
  * License:           

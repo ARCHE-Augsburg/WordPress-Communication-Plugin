@@ -232,10 +232,10 @@ class aacp_Core {
 		$fileValidator = new aacp_FileValidator();
 		$this->loader->add_action( 'podcast_file_validation_job', $fileValidator, 'validate_and_send_email' );
 		
-		// Configuration
-		$configuration = new aacp_Configuration();
-		$this->loader->add_filter( 'cron_schedules', $configuration, 'cron_add_every_minute_interval' );
-		$this->loader->add_filter( 'cron_request', $configuration, 'http_basic_cron_request' );
+		// Development configuration
+		//$configuration = new aacp_Configuration();
+		//$this->loader->add_filter( 'cron_schedules', $configuration, 'cron_add_every_minute_interval' );
+		//$this->loader->add_filter( 'cron_request', $configuration, 'http_basic_cron_request' );
 		
 		$this->loader->run();
 	}
