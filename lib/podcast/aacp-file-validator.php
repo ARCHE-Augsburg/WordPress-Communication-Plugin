@@ -43,7 +43,7 @@ class aacp_FileValidator {
         $incorrectFiles = $this->get_incorrect_files();
         
         if(count($incorrectFiles) > 0) {
-            $recepients = 'mariusmueller1988@web.de';
+            $recepients = AA_EMAILADRESSE_PODCAST_VALIDIERUNG;
     	    $subject = 'Podcast Datei Validierung - ARCHE WP Plugin';
     	    $message = "Einige Dateien sind möglicherweise falsch benannt und werden auf der Homepage nicht angezeigt\r\n";
     	    $message .= "\r\n";
