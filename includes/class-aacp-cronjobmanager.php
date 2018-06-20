@@ -3,7 +3,7 @@
 class aacp_CronJobManger {
     
     public function schedule_cron_job_podcast_file_validation(){
-    	$this->schedule_cron_job( 'hourly', 'podcast_file_validation_job' );
+    	$this->schedule_cron_job( 'weekly', 'podcast_file_validation_job' );
     }
     
 	private function schedule_cron_job($intervall, $jobName){
