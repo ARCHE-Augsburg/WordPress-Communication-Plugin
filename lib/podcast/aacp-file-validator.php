@@ -4,7 +4,6 @@ class aacp_FileValidator {
 
     public function validate_and_get_bad_files() {
         $response;
-        $incorrectFiles = array();
         $incorrectFiles = $this->get_incorrect_files();
         
         if(count($incorrectFiles) > 0) {
@@ -37,14 +36,22 @@ class aacp_FileValidator {
     }
     
     public function validate_and_send_email() {
-        $incorrectFiles = array();
         $incorrectFiles = $this->get_incorrect_files();
         
-    	$recepients = 'mariusmueller1988@web.de';
-    	$subject = 'Hello from your Cron Job';
-    	$message = 'This is a test mail sent by WordPress automatically as per your schedule.';
-    	 
-    	mail($recepients, $subject, $message);
+        if(count($incorrectFiles) > 0) {
+            $recepients = 'mariusmueller1988@web.de';
+    	    $subject = 'Podcast Datei Validierung - ARCHE WP Plugin';
+    	    $message = "Einige Dateien sind möglicherweise falsch benannt und werden auf der Homepage nicht angezeigt\r\n";
+    	    $message .= "\r\n";
+    	    
+            foreach($incorrectFiles as $file) {
+                $message .= $file . "\r\n";
+            }
+            
+            $message .= "\r\n";
+            $message .= "Dies ist eine vom ARCHE Wordpress Plugin automatisch gernerierte Email.";
+            mail($recepients, $subject, $message);
+        }
     }
 }
 
