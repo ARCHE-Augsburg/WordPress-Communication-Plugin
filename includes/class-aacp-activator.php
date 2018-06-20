@@ -30,7 +30,9 @@ class aacp_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		// Activate cron jobs
+		$cronJobManager = new aacp_CronJobManger();
+		$cronJobManager->schedule_cron_job_podcast_file_validation();
 	}
 
 }
