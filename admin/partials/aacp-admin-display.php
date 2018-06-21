@@ -34,8 +34,7 @@
         <h3>Einlesen der .ics exporte auf der Homepage</h3>
         <p>Die Homepage liest die exportierten Dateien alle 24 Stunden neu ein und gibt ihnen diese kryptischen Namen.</p>
         <div class="cache-status">
-            <?php 
-                $synchronizer = new aacp_IcalSynchronizer();
+            <?php
                 echo $synchronizer->evaluate_cache_files();
             ?>
         </div>
@@ -47,8 +46,8 @@
         <h3>ARCHE Termine (Print-Newsletter)</h3>
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats.<p>
             <?php
-                $file_exporter = new aacp_FileExporter();
-                $month_of_export = $file_exporter->get_month_of_export_newsletter();
+                $file_export_manager = new aacp_FileExportManager();
+                $month_of_export = $file_export_manager->get_month_of_export_newsletter();
             ?>
         <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
         <div class="export-print-newsletter-response"></div>

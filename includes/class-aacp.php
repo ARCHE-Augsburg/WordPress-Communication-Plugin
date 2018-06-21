@@ -144,7 +144,7 @@ class aacp_Core {
 		/**
 		 * The class responsible for file exports.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-exporter.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-export-manager.php';
 
 		/**
 		 * The class responsible for ical synchronization.
@@ -228,8 +228,8 @@ class aacp_Core {
 		$this->loader->add_action( 'wp_ajax_icalsync', $ical_synchronizer, 'synchronize_calendar' );
 		
 		// File exports
-		$file_exporter = new aacp_FileExporter();
-		$this->loader->add_action( 'wp_ajax_newsletterexport', $file_exporter, 'export_print_newsletter' );
+		$file_export_manager = new aacp_FileExportManager();
+		$this->loader->add_action( 'wp_ajax_newsletterexport', $file_export_manager, 'export_print_newsletter' );
 		
 		// Podcast file validation
 		$file_validator = new aacp_FileValidator();
