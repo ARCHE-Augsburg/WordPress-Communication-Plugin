@@ -65,8 +65,7 @@ class aacp_MailchimpIntegration {
     }
     
     private function are_mailchimp_constants_defined(){
-        $is_active = defined( 'AA_MAILCHIMP_FILEMANAGER_URL');
-            $var = 1;
+        $is_active = defined( 'AA_MAILCHIMP_FILEMANAGER_URL') && defined( 'AA_MAILCHIMP_USERNAME') && defined( 'AA_MAILCHIMP_APIKEY');
         return $is_active;
     }
     
