@@ -70,7 +70,7 @@ class aacp_Core {
 		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '1.0.3';
 		}
 		$this->plugin_name = 'ARCHE-Augsburg-Communication-Plugin';
 
@@ -125,11 +125,6 @@ class aacp_Core {
 		 * The class responsible for the backend ui of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-backend.php';
-		
-		/**
-		 * The class responsible for ajax.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-aacp-ajax.php';
 		
 		/**
 		 * The class responsible for the cron job stuff.
@@ -228,18 +223,21 @@ class aacp_Core {
 		$backend = new aacp_Backend();
 		$this->loader->add_action( 'admin_menu', $backend, 'get_aacp_backend' );
 		
-		// Ajax
-		$ajax = new aacp_Ajax();
-		$this->loader->add_action( 'wp_ajax_newsletterexport', $ajax, 'export_print_newsletter' );
-		$this->loader->add_action( 'wp_ajax_icalsync', $ajax, 'synchronize_calendar' );
+		// Ical synchronization
+		$ical_synchronizer = new aacp_IcalSynchronizer();
+		$this->loader->add_action( 'wp_ajax_icalsync', $ical_synchronizer, 'synchronize_calendar' );
 		
-		// Cron jobs
-		$fileValidator = new aacp_FileValidator();
-		$this->loader->add_action( 'podcast_file_validation_job', $fileValidator, 'validate_and_send_email' );
+		// File exports
+		$file_exporter = new aacp_FileExporter();
+		$this->loader->add_action( 'wp_ajax_newsletterexport', $file_exporter, 'export_print_newsletter' );
+		
+		// Podcast file validation
+		$file_validator = new aacp_FileValidator();
+		$this->loader->add_action( 'podcast_file_validation_job', $file_validator, 'validate_and_send_email' );
 		
 		// Mailchimp integration
-		$mailchimpIntegration = new aacp_MailchimpIntegration();
-		$this->loader->add_action( 'publish_events', $mailchimpIntegration, 'upload_image_to_mailchimp' );
+		$mailchimp_integration = new aacp_MailchimpIntegration();
+		$this->loader->add_action( 'publish_events', $mailchimp_integration, 'upload_image_to_mailchimp' );
 		
 		// Development configuration
 		//$configuration = new aacp_Configuration();

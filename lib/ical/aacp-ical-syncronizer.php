@@ -12,6 +12,15 @@ class aacp_IcalSynchronizer {
 		$this->calendarUrl = get_site_url() . "/kalender";
 	}
 
+	public function synchronize_calendar() {
+        $this->synchronize();
+        $response = array();
+        $response[] = $synchronizer->evaluate_log_file();
+        $response[] = $synchronizer->evaluate_cache_files();
+        echo json_encode($response);
+        wp_die();
+    }
+
 	public function evaluate_log_file() {
 		$response;
 		
@@ -73,7 +82,7 @@ class aacp_IcalSynchronizer {
 		return $response;
 	}
 	
-	public function synchronize() {
+	private function synchronize() {
 		$this->trigger_sync_script();
 		$this->trigger_calendar_refetch();
 	}
