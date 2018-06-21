@@ -32,7 +32,7 @@
             ?>
         </div>
         <h3>Einlesen der .ics exporte auf der Homepage</h3>
-        <p>Die Homepage liest die exportierten Dateien alle 24 Stunden neu ein.</p>
+        <p>Die Homepage liest die exportierten Dateien alle 24 Stunden neu ein und gibt ihnen diese kryptischen Namen.</p>
         <div class="cache-status">
             <?php 
                 $synchronizer = new aacp_IcalSynchronizer();
@@ -40,32 +40,23 @@
             ?>
         </div>
         <h3>Manuelle Synchronisation</h3>
-        <p>Hier kann die Synchronisation (erst der Export, dann das Einlesen auf der Homepage) manuell ausgeführt werden.</p>
+        <p>Hier kann die Synchronisation (sowohl der Export, als auch das Einlesen auf der Homepage) manuell ausgeführt werden.</p>
         <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
     </div>
     <div class="tab-file-exports hidden">
-        <p>Hier kannst du die Exporteinstellungen für verschiedene Dateien festlegen und manuell exportieren.</p>
-        
         <h3>ARCHE Termine (Print-Newsletter)</h3>
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats.<p>
-        
-        <?php 
-            $file_exporter = new aacp_FileExporter();
-            $month_of_export = $file_exporter->get_month_of_export_newsletter();
-        ?>
-        
+            <?php
+                $file_exporter = new aacp_FileExporter();
+                $month_of_export = $file_exporter->get_month_of_export_newsletter();
+            ?>
         <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
         <div class="export-print-newsletter-response"></div>
-        
-        <h3>Powerpoint-Präsentation</h3>
-        <p>Die Präsentation läuft jeden Sonntag vor den Gottesdiensten.<p>
-        
-        <input type="submit" name="submit" id="submit" class="button button-primary" value="ppp herunterladen">
     </div>
     <div class="tab-podcast-file-validation hidden">
         <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
         <div class="">
-            <?php 
+            <?php
                 $file_validator = new aacp_FileValidator();
                 echo $file_validator->validate_and_get_bad_files();
             ?>
