@@ -18,8 +18,6 @@
  * Domain Path:       /languages
  */
 
-define( 'AACP_PLUGIN_BASE_FILE', __FILE__ );
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
