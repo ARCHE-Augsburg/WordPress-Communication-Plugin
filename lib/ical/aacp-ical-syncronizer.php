@@ -13,7 +13,7 @@ class aacp_IcalSynchronizer {
 	}
 
 	public function evaluate_log_file() {
-		$response;
+		$response = "";
 		
 		$options = array(
 			CURLOPT_URL => $this->logFileUrl,

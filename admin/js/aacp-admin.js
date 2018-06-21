@@ -100,22 +100,24 @@
 	function ajaxCall() {
 		$.ajax({
 			url: ajaxurl,
+			type: "POST",
 			data: {
 				'action' : 'newsletterexport',
 				'month' : 3
 			},
+            dataType:"json",
     		beforeSend:function(xhr){
-    		    $('.export-status').html('<img src="/wp-admin/images/loading.gif" />'); 
+    		    $('.export-print-newsletter-response').html('<img src="/wp-admin/images/loading.gif" />'); 
     		},
     		success:function(data){
     			$('.export-print-newsletter-response').html(data);
     		},
     		error: function (data) {
     		    alert("Ein Fehler ist aufgetreten.");
+    		    $('.export-print-newsletter-response').html("");
             },
             complete: function(data) {
-            },
-            dataType:"json"
+            }
 		});
 	}
 

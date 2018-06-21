@@ -17,7 +17,7 @@
 	 * @access   protected
 	 * @var      string            $actions       The template file defining the styles to apply to newsletter export
 	 */
-	protected $templateFile;
+	protected $template_file;
     
     /**
 	 * Construct the class
@@ -28,7 +28,7 @@
 	 */
 	public function __construct() {
 		
-		$this->templateFile = "";
+		$this->template_file = "";
 
 	}
     
@@ -50,32 +50,34 @@
 		 // return the path
 		 
 		 
-		 return get_events ();
-		 //return "test";
+		 $bla = $this->get_events( $month );
+		 
+		 return "Hier ist der Link zum Export";
 	}
 	
-	private function get_events () {
+	private function get_events ( $month ) {
 		$events = array();
-
+		
 		$argu = array(
             'post_type' => 'events',
         );
 
-		$my_query = new WP_Query($argu);
+		$query = new WP_Query($argu);
 
-    	if($my_query->have_posts()) {
-    		while ($my_query->have_posts()) 
+    	if($query->have_posts()) {
+    		while ($query->have_posts()) 
     		{
-            $the_query->the_post();
-            
-			$event = array();
-            $event['permalink'] = the_permalink();
-            $event['post_title'] = get_the_title();
-            
-            array_push($events, $event);
+	            $query->the_post();
+	            
+				$event = array();
+	            $event['permalink'] = get_the_permalink();
+	            $event['post_title'] = get_the_title();
+	            $evnet['content'] = get_the_content();
+	            array_push($events, $event);
     		}
     	}
 		wp_reset_postdata();
+		
 		return $events;
 	}
 }

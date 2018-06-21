@@ -3,7 +3,7 @@
 class aacp_FileValidator {
 
     public function validate_and_get_bad_files() {
-        $response;
+        $response = "";
         $incorrectFiles = $this->get_incorrect_files();
         
         if(count($incorrectFiles) > 0) {
