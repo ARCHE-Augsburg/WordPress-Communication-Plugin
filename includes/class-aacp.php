@@ -142,10 +142,15 @@ class aacp_Core {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/constants.php';
 
 		/**
-		 * The class responsible for file exports.
+		 * The class responsible for managing file exports.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-export-manager.php';
 
+		/**
+		 * The class responsible for actual rendering the file.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-renderer.php';
+		
 		/**
 		 * The class responsible for ical synchronization.
 		 */
