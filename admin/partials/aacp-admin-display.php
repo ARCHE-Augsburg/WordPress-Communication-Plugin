@@ -23,7 +23,6 @@
         <a class="nav-tab nav-tab-online-newsletter" href="#online-newsletter">Online Newsletter</a>
     </div>
     <div class="tab-ical-sync">
-        <h2>Ical-Synchronisation</h2>
         <h3>ChurchTools Kalender .ics export</h3>
         <p>Die Kalender in ChurchTools werden stündlich exportiert.</p>
         <div class="export-status">
@@ -45,13 +44,17 @@
         <input type="submit" name="submit" id="synchronize-calendar" class="button button-primary" value="Jetzt synchronisieren">
     </div>
     <div class="tab-file-exports hidden">
-        <h2>Dateiexporte</h2>
         <p>Hier kannst du die Exporteinstellungen für verschiedene Dateien festlegen und manuell exportieren.</p>
         
         <h3>ARCHE Termine (Print-Newsletter)</h3>
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats.<p>
         
-        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="docx herunterladen">
+        <?php 
+            $file_exporter = new aacp_FileExporter();
+            $month_of_export = $file_exporter->get_month_of_export_newsletter();
+        ?>
+        
+        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
         <div class="export-print-newsletter-response"></div>
         
         <h3>Powerpoint-Präsentation</h3>
@@ -60,12 +63,11 @@
         <input type="submit" name="submit" id="submit" class="button button-primary" value="ppp herunterladen">
     </div>
     <div class="tab-podcast-file-validation hidden">
-        <h2>Podcast Dateien</h2>
         <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
         <div class="">
             <?php 
-                $fileValidator = new aacp_FileValidator();
-                echo $fileValidator->validate_and_get_bad_files();
+                $file_validator = new aacp_FileValidator();
+                echo $file_validator->validate_and_get_bad_files();
             ?>
         </div>
             <?php if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) { ?>
@@ -76,7 +78,6 @@
             <?php } ?>
     </div>
     <div class="tab-online-newsletter hidden">
-        <h3>Mailchimp Bilder upload</h3>
         <p>Wenn die Zugangsdaten in der config Datei eingetragen sind, wird die erste Grafikdatei eines Events automatisch
         mit dem click auf "veröffentlichen" in die Mailchimp Mediathek hochgeladen.</p>
         <p>Status: 

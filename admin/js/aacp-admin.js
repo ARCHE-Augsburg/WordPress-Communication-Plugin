@@ -94,16 +94,17 @@
 	});
 
 	$('#export-print-newsletter').click(function(){
-		ajaxCall();
+		var month = $('#export-print-newsletter').data('month');
+		ajaxCall(month);
 	});
 	
-	function ajaxCall() {
+	function ajaxCall(month) {
 		$.ajax({
 			url: ajaxurl,
 			type: "POST",
 			data: {
 				'action' : 'newsletterexport',
-				'month' : 3
+				'month' : month
 			},
             dataType:"json",
     		beforeSend:function(xhr){
@@ -120,7 +121,6 @@
             }
 		});
 	}
-
 
 	$('.tab-ical-sync').on('click', '#synchronize-calendar', function(){
 		synchronizeCalendar();
