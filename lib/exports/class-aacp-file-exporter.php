@@ -43,14 +43,12 @@
 	public function export_newsletter ( $month ) {
 		 
 		 // Parse template file
+		 
 		 // Get export data
-		 //$events = GetEvents();
+		 $events_to_print = $this->get_events( $month );
 		 
 		 // Generate export file in export-data directory
 		 // return the path
-		 
-		 
-		 $bla = $this->get_events( $month );
 		 
 		 return "Hier ist der Link zum Export";
 	}
@@ -69,10 +67,15 @@
     		{
 	            $query->the_post();
 	            
+	            $uploads = wp_upload_dir();
+	            
 				$event = array();
 	            $event['permalink'] = get_the_permalink();
 	            $event['post_title'] = get_the_title();
-	            $evnet['content'] = get_the_content();
+	            $image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' )[0];
+	            $event['image_url'] = $image_url;
+	            $event['image_path'] = str_replace( $uploads['baseurl'], $uploads['basedir'], $image_url );
+	            $event['content'] = get_the_content();
 	            array_push($events, $event);
     		}
     	}
