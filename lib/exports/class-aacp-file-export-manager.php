@@ -13,23 +13,27 @@ class aacp_FileExportManager {
     public function export_print_newsletter() {
         // Month of the newsletter to be exported
         $month = $_POST['month'];
+        $response = array();
         $export_file_url = $this->export_newsletter( $month );
-        $html_response = '<a class="button button-primary" href="' . $export_file_url . '">herunterladen</a>';
-        echo json_encode( $html_response );
+        $html_response = 'Wenn der Download nicht automatisch startet, <a target="_blank" href="' . $export_file_url . '">hier klicken</a>.';
+        $response[] = $export_file_url;
+        $response[] = $html_response;
+        echo json_encode( $response );
         wp_die();
     }
     
 	private function export_newsletter ( $month ) {
 		 $events_to_print = $this->query_events( $month );
 		 $file_name = 'CI-ARCHE.docx';
+		 $file_full_url = $this->exports_url . '/' . $file_name;
 		 $file_renderer = new aacp_FileRenderer();
-		 $file_renderer->render_newsletter( $events_to_print, $file_name );
-		 return $this->exports_url . '/' . $file_name;
+		 $file_renderer->render_newsletter( $events_to_print, $file_full_url );
+		 return $file_full_url;
 	}
 	
 	private function query_events ( $month ) {
 		$events = array();
-		$start_date = date( 'Y' ) . '-' . $month . '-1';
+		$start_date = $this->get_start_date( $month );
 		
 		$argu = array(
             'post_type' => 'events',
@@ -60,6 +64,11 @@ class aacp_FileExportManager {
 		wp_reset_postdata();
 		
 		return $events;
+	}
+	
+	private function get_start_date() {
+		// Currently we work with the first day of the month
+		return date( 'Y' ) . '-' . $month . '-1';
 	}
 	
 	private function get_event() {

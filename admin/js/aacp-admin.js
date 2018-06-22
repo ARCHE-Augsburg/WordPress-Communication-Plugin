@@ -111,7 +111,10 @@
     		    $('.export-print-newsletter-response').html('<img src="/wp-admin/images/loading.gif" />'); 
     		},
     		success:function(data){
-    			$('.export-print-newsletter-response').html(data);
+    			$('.export-print-newsletter-response').html(data[1]);
+    			var form  = $('<form method=get action="' + data[0] + '"></form>');
+    			$('body').append(form);
+            	form.submit(); 
     		},
     		error: function (data) {
     		    alert("Ein Fehler ist aufgetreten.");

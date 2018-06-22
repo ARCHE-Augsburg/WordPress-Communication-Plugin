@@ -44,12 +44,14 @@
     </div>
     <div class="tab-file-exports hidden">
         <h3>ARCHE Termine (Print-Newsletter)</h3>
-        <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats.<p>
+        <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats. 
+        Ab dem 15. eines Monats kann die Vorlage hier exportiert werden.</p>
+        <p>Damit ein Event berücksichtigt wird, muss das Startdatum eines Events im jeweiligen Monat liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein.<p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $month_of_export = $file_export_manager->get_month_of_export_newsletter();
             ?>
-        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> erstellen">
+        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
         <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">
