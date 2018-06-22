@@ -2,10 +2,9 @@
 
 class aacp_FileRenderer {
 
-	public function render_newsletter_and_get_url( $events_to_print ) {
+	public function render_newsletter( $events_to_print, $file_name ) {
 		// Use PHPWord API here
 		
-		return "Hier ist die fertige datei.";
 	}
 	
 }

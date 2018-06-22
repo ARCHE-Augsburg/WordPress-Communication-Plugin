@@ -3,28 +3,28 @@
 class aacp_FileExportManager {
     
 	protected $templateFile;
+	protected $exports_url;
     
 	public function __construct() {
-		$this->template_file = "";
+		$this->template_file = '';
+		$this->exports_url = wp_upload_dir()['baseurl'] . '/aacp-exports';
 	}
     
     public function export_print_newsletter() {
         // Month of the newsletter to be exported
-        $month;
-        
-        if( !empty( $_POST['month'] ) && $_POST['month'] != '') {
-            $month = $_POST['month'];
-        }
-        
-        $response = $this->export_newsletter( $month );
-        echo json_encode( $response );
+        $month = $_POST['month'];
+        $export_file_url = $this->export_newsletter( $month );
+        $html_response = '<a class="button button-primary" href="' . $export_file_url . '">herunterladen</a>';
+        echo json_encode( $html_response );
         wp_die();
     }
     
 	private function export_newsletter ( $month ) {
 		 $events_to_print = $this->query_events( $month );
+		 $file_name = 'CI-ARCHE.docx';
 		 $file_renderer = new aacp_FileRenderer();
-		 return $file_renderer->render_newsletter_and_get_url( $events_to_print );
+		 $file_renderer->render_newsletter( $events_to_print, $file_name );
+		 return $this->exports_url . '/' . $file_name;
 	}
 	
 	private function query_events ( $month ) {

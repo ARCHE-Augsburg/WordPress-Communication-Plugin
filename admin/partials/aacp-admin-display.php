@@ -49,7 +49,7 @@
                 $file_export_manager = new aacp_FileExportManager();
                 $month_of_export = $file_export_manager->get_month_of_export_newsletter();
             ?>
-        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
+        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> erstellen">
         <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">

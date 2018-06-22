@@ -27,7 +27,7 @@ class aacp_Backend {
 	    // I don't know how to manage this other than using this capability, which
 	    // is used for both roles.
 	    $capability = 'moderate_comments'; 
-        add_menu_page('AACP Settings', 'AACP Settings', $capability, 'aacp-settings', array($this, 'aacp_settings_page'), 'dashicons-update');
+        add_menu_page( 'AACP Settings', 'AACP Settings', $capability, 'aacp-settings', array( $this, 'aacp_settings_page' ), 'dashicons-update' );
 	}
     
     public function aacp_settings_page() { 
