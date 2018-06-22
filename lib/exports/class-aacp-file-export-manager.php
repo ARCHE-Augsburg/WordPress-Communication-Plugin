@@ -81,7 +81,7 @@ class aacp_FileExportManager {
 			$args = array('size' => "large", 'type' => 'image');
 			$images = rwmb_meta( 'aa_event_gx', $args, $post->ID  );
 			
-			if ( count($images) > 0 ) {
+			if ( count( $images ) > 0 ) {
 				$image['path'] = reset($images)['path'];
 				$image['url'] = reset($images)['url'];
 			}
@@ -95,23 +95,23 @@ class aacp_FileExportManager {
 		$end = rwmb_meta('aa_event_end_datetime');
         
         // Start and end date are the same
-		if (empty($end) || date('Ymd', $start) == date('Ymd', $end)) 
+		if (empty( $end ) || date( 'Ymd', $start ) == date( 'Ymd', $end ) ) 
 		{
-            $datetime = strftime('%a, %d. %b', $start);
+            $datetime = strftime( '%a, %d. %b', $start );
             $end = $start;
         }
         // Start and end date are different
         else 
         {
             // Same month
-            if(date('Ym', $start) == date('Ym', $end))
+            if ( date( 'Ym', $start ) == date( 'Ym', $end ) )
             {
-                $datetime = strftime('%a, %d.', $start).' - '.strftime('%a, %d. %b', $end);
+                $datetime = strftime( '%a, %d.', $start ).' - '.strftime( '%a, %d. %b', $end );
             }
             // Different month
             else
             {
-                $datetime = strftime('%a, %d. %b', $start).' - '.strftime('%a, %d. %b', $end);
+                $datetime = strftime( '%a, %d. %b', $start ).' - '.strftime( '%a, %d. %b', $end );
             }
         }
         
