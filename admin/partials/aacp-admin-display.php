@@ -55,19 +55,20 @@
         <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">
-        <p>Hier werden eventuell fehlerhaft benannte Dateien anzezeigt.</p>
-        <div class="">
+        <p>Die Podcast Dateien werden wöchentlich validiert und einen Email versandt, wenn falsch benannte 
+        Dateien entdeckt werden. Fehlerhaft benannte Dateien werden auf der Homepage nicht angezeigt.</p>
+        <p>Status: 
             <?php
                 $file_validator = new aacp_FileValidator();
+                echo $file_validator->get_configuration_status();
+            ?>
+        </p>
+        <p>Hier werden momentan fehlerhaft benannte Dateien anzezeigt.</p>
+        <div class="">
+            <?php
                 echo $file_validator->validate_and_get_bad_files();
             ?>
         </div>
-            <?php if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) { ?>
-                 <p><strong>Für die wöchentliche automatische Prüfung wurde keine Emailadresse definiert.</strong></p>
-            <?php } else {?>
-                <p>Es wird auch jede Woche automatisch auf fehlerhaft benannte Dateien geprüft und eine 
-                Benachrichtigungsmail an '<?php echo AA_EMAILADRESSE_PODCAST_VALIDIERUNG; ?>' geschickt.</p>
-            <?php } ?>
     </div>
     <div class="tab-online-newsletter hidden">
         <p>Wenn die Zugangsdaten in der config Datei eingetragen sind, wird die erste Grafikdatei eines Events automatisch
@@ -75,7 +76,7 @@
         <p>Status: 
             <?php
                 $mailchimp_intrgration = new aacp_MailchimpIntegration();
-                echo $mailchimp_intrgration->is_mailchimp_upload_activated();
+                echo $mailchimp_intrgration->get_mailchimp_integration_status();
             ?>
         </p>
     </div>

@@ -57,6 +57,16 @@ class aacp_FileValidator {
             mail($recepients, $subject, $message);
         }
     }
+    
+    public function get_configuration_status() {
+        $response = "";
+        if ( !defined( 'AA_EMAILADRESSE_PODCAST_VALIDIERUNG' ) ) { 
+            $response .=  AACP_FAILURE_ICON . "nicht aktiv";
+        } else {
+            $response .= AACP_SUCCESS_ICON . "aktiv (" . AA_EMAILADRESSE_PODCAST_VALIDIERUNG . ")";
+        }
+        return $response;
+    }
 }
 
 ?>

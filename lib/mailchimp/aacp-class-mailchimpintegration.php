@@ -69,7 +69,7 @@ class aacp_MailchimpIntegration {
         return $is_active;
     }
     
-    public function is_mailchimp_upload_activated() {
+    public function get_mailchimp_integration_status() {
         if ( $this->are_mailchimp_constants_defined() ) {
             return AACP_SUCCESS_ICON . "aktiv";
         }
