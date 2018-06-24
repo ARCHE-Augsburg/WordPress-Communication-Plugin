@@ -6,7 +6,7 @@ class aacp_OwncloudAdapter {
     private $password;
     private $upload_directory;
     
-    public upload_service_presentation_export () {
+    public function upload_service_presentation_export () {
         
     }
     
