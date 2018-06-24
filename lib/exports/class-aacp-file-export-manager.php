@@ -153,6 +153,7 @@ class aacp_FileExportManager {
 	}
 	
 	public function export_service_presentation() {
-		
+		$owncloud_adapter = new aacp_OwncloudAdapter();
+		$owncloud_adapter->upload_service_presentation_export();
 	}
 }

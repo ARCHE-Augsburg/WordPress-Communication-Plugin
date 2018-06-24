@@ -145,6 +145,11 @@ class aacp_Core {
 		 * The class responsible for managing file exports.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-export-manager.php';
+		
+		/**
+		 * The class responsible for operations interacting with a owncloud instace.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-owncloud-adapter.php';
 
 		/**
 		 * The class responsible for actual rendering the file.
