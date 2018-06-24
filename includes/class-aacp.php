@@ -235,10 +235,10 @@ class aacp_Core {
 		// File exports
 		$file_export_manager = new aacp_FileExportManager();
 		$this->loader->add_action( 'wp_ajax_newsletterexport', $file_export_manager, 'export_print_newsletter' );
+		$this->loader->add_action( 'service_presentation_export_job', $file_export_manager, 'export_service_presentation' );
 		
 		// Podcast file validation
 		$file_validator = new aacp_FileValidator();
-		$this->loader->add_action( 'podcast_file_validation_job', $file_validator, 'validate_and_send_email' );
 		
 		// Mailchimp integration
 		$mailchimp_integration = new aacp_MailchimpIntegration();

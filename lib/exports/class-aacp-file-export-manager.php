@@ -151,4 +151,8 @@ class aacp_FileExportManager {
 		
 		return $export_month;
 	}
+	
+	public function export_service_presentation() {
+		
+	}
 }

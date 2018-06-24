@@ -33,7 +33,7 @@ class aacp_Activator {
 		// Activate cron jobs
 		$cronJobManager = new aacp_CronJobManger();
 		$cronJobManager->schedule_cron_job_podcast_file_validation();
-		$cronJobManager->schedule_cron_job_presentation_export();
+		$cronJobManager->schedule_cron_job_service_presentation_export();
 	}
 
 }

@@ -33,7 +33,7 @@ class aacp_Deactivator {
 		// Deactivate cron jobs
 		$cronJobManager = new aacp_CronJobManger();
 		$cronJobManager->unschedule_cron_job_podcast_file_validation();
-		$cronJobManager->unschedule_cron_job_presentation_export();
+		$cronJobManager->unschedule_cron_job_service_presentation_export();
 	}
 
 }
