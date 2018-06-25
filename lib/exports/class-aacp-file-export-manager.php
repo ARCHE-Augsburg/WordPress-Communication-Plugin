@@ -4,10 +4,12 @@ class aacp_FileExportManager {
     
 	protected $templateFile;
 	protected $exports_url;
+    protected $exports_path;
     
 	public function __construct() {
 		$this->template_file = '';
 		$this->exports_url = wp_upload_dir()['baseurl'] . '/aacp-exports';
+		$this->exports_path = wp_upload_dir()['basedir'] . '/aacp-exports';
 	}
     
     public function export_print_newsletter() {
@@ -26,8 +28,9 @@ class aacp_FileExportManager {
 		 $events_to_print = $this->query_events( $month );
 		 $file_name = 'CI-ARCHE.docx';
 		 $file_full_url = $this->exports_url . '/' . $file_name;
+		 $file_full_path = $this->exports_path . '/' . $file_name;
 		 $file_renderer = new aacp_FileRenderer();
-		 $file_renderer->render_newsletter( $events_to_print, $file_full_url );
+		 $file_renderer->render_newsletter( $events_to_print, $file_full_path );
 		 return $file_full_url;
 	}
 	
@@ -66,7 +69,7 @@ class aacp_FileExportManager {
 		return $events;
 	}
 	
-	private function get_start_date() {
+	private function get_start_date( $month ) {
 		// Currently we work with the first day of the month
 		return date( 'Y' ) . '-' . $month . '-1';
 	}
