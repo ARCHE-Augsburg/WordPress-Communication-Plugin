@@ -41,7 +41,7 @@ class aacp_FileExportManager {
 		$argu = array(
             'post_type' => 'events',
             'orderby' => 'meta_value_num', 
-            'meta_key'=> 'aa_event_start_datetime',
+            'meta_key'=> 'aa_event_publishing_start_datetime',
             'order' => 'ASC',
             'meta_value' => strtotime( $start_date ),
             'meta_compare' => '>',
@@ -70,8 +70,7 @@ class aacp_FileExportManager {
 	}
 	
 	private function get_start_date( $month ) {
-		// Currently we work with the first day of the month
-		return date( 'Y' ) . '-' . $month . '-1';
+		return date();
 	}
 	
 	private function get_event() {
