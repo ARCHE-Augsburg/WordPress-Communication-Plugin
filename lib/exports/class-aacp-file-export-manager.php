@@ -47,7 +47,7 @@ class aacp_FileExportManager {
             'meta_compare' => '>',
 			'tax_query' => array(
 				array(
-			        'taxonomy' => 'Anzeigeeinstellungen',
+			        'taxonomy' => 'Werbekanäle',
 			        'field' => 'slug',
 			        'terms' => 'arche-termine-print',
 			    ),
@@ -80,10 +80,21 @@ class aacp_FileExportManager {
         $event['permalink'] = get_the_permalink();
         $event['post_title'] = get_the_title();
         $event['image'] = $this->get_event_image();
-        $event['content'] = get_the_content();
+        $event['content'] = $this->get_event_content();
         $event['date'] = $this->get_datetime_string();
         
         return $event;
+	}
+	
+	private function get_event_content() {
+		$text = "";
+		if ( rwmb_meta( 'aa_event_text_alternative' , null, $post->ID  ) != "") {
+			$text = rwmb_meta( 'aa_event_text_alternative' , null, $post->ID  );
+		}
+		else {
+			// Maybe we want to handle this situation somehow
+		}
+		return $text;
 	}
 	
 	private function get_event_image() {
