@@ -46,11 +46,12 @@
         <h3>ARCHE Termine (Print-Newsletter)</h3>
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats. 
         Ab dem 15. eines Monats kann die Vorlage hier exportiert werden.</p>
-        <p>Damit ein Event berücksichtigt wird, muss das Startdatum eines Events im jeweiligen Monat liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein.<p>
+        <p>Damit ein Event berücksichtigt wird, muss das "Veröffentlichungsdtum Webekanäle" vor dem ersten Tag des Exportmonats liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein. 
+        Es können aus Platzgründen maximal drei Events ausgewählt werden.<p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $month_of_export = $file_export_manager->get_month_of_export_newsletter();
-                $events = $file_export_manager->query_events_for_selection();
+                $events = $file_export_manager->query_events_for_selection( $month_of_export );
             ?>
         <form id="nl-export-form" method="post">
             <fieldset>
@@ -60,7 +61,7 @@
                     <?php foreach ($events as $event) { ?>
                     <li>
                         <label>
-                            <input type="checkbox" name="post_ids[]" value="<?php echo $event['post_id']; ?>">
+                            <input class="single-checkbox" type="checkbox" name="post_ids[]" value="<?php echo $event['post_id']; ?>">
                             <?php echo $event['post_title']; ?>
                         </label>
                     </li>

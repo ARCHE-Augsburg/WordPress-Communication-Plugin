@@ -71,7 +71,7 @@ class aacp_FileExportManager {
             'meta_key'=> 'aa_event_publishing_start_datetime',
             'order' => 'ASC',
             'meta_value' => strtotime( $start_date ),
-            'meta_compare' => '>',
+            'meta_compare' => '<',
 			'tax_query' => array(
 				array(
 			        'taxonomy' => 'Werbekanäle',
@@ -97,7 +97,7 @@ class aacp_FileExportManager {
 	}
 	
 	private function get_start_date( $month ) {
-		return date();
+		return date('Y') . '-' . $month['number'] . '-1';
 	}
 	
 	private function get_event() {

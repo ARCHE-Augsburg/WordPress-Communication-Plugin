@@ -94,10 +94,12 @@
 	});
 
 	$('#nl-export-form').submit(function(e){
+		var formData = $('#nl-export-form').serialize();
+		
 		$.ajax({
 			url: ajaxurl,
 			type: 'POST',
-			data: $('#nl-export-form').serialize(),
+			data: formData,
             dataType:"json",
     		beforeSend:function(xhr){
     		    $('.export-print-newsletter-response').html('<img src="/wp-admin/images/loading.gif" />'); 
@@ -117,6 +119,13 @@
 		});
 		
 		e.preventDefault();
+	});
+	
+	var limit = 3;
+	$('input.single-checkbox').on('change', function(evt) {
+	   if($('input[name="post_ids[]"]:checked').length > limit) {
+	       this.checked = false;
+	   }
 	});
 
 	$('.tab-ical-sync').on('click', '#synchronize-calendar', function(){
