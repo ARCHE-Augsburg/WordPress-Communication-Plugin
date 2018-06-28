@@ -65,13 +65,26 @@ class aacp_FileExportManager {
 		$events = array();
 		$start_date = $this->get_start_date( $month );
 		
+		$meta_query = array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'aa_event_publishing_start_datetime',
+					'value'   => strtotime( $start_date ),
+					'compare' => '<'
+				),
+				array(
+					'key'     => 'aa_event_end_datetime',
+					'value'   => strtotime( $start_date ),
+					'compare' => '>'
+				),
+			);
+		
 		$argu = array(
             'post_type' => 'events',
+            'meta_query' => $meta_query,
             'orderby' => 'meta_value_num', 
-            'meta_key'=> 'aa_event_publishing_start_datetime',
+            'meta_key'=> 'aa_event_start_datetime',
             'order' => 'ASC',
-            'meta_value' => strtotime( $start_date ),
-            'meta_compare' => '<',
 			'tax_query' => array(
 				array(
 			        'taxonomy' => 'Werbekanäle',
