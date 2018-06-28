@@ -93,19 +93,11 @@
 		return false;
 	});
 
-	$('#export-print-newsletter').click(function(){
-		var month = $('#export-print-newsletter').data('month');
-		ajaxCall(month);
-	});
-	
-	function ajaxCall(month) {
+	$('#nl-export-form').submit(function(e){
 		$.ajax({
 			url: ajaxurl,
-			type: "POST",
-			data: {
-				'action' : 'newsletterexport',
-				'month' : month
-			},
+			type: 'POST',
+			data: $('#nl-export-form').serialize(),
             dataType:"json",
     		beforeSend:function(xhr){
     		    $('.export-print-newsletter-response').html('<img src="/wp-admin/images/loading.gif" />'); 
@@ -123,7 +115,9 @@
             complete: function(data) {
             }
 		});
-	}
+		
+		e.preventDefault();
+	});
 
 	$('.tab-ical-sync').on('click', '#synchronize-calendar', function(){
 		synchronizeCalendar();

@@ -50,9 +50,26 @@
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $month_of_export = $file_export_manager->get_month_of_export_newsletter();
+                $events = $file_export_manager->query_events_for_selection();
             ?>
-        <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" data-month="<?php echo $month_of_export['number']?>" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
-        <div class="export-print-newsletter-response"></div>
+        <form id="nl-export-form" method="post">
+            <fieldset>
+            <input type="hidden" name="action" value="newsletterexport"> 
+            <input type="hidden" name="month" value="<?php echo $month_of_export['number']; ?>">    
+                <ul>
+                    <?php foreach ($events as $event) { ?>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="post_ids[]" value="<?php echo $event['post_id']; ?>">
+                            <?php echo $event['post_title']; ?>
+                        </label>
+                    </li>
+                    <?php } ?> 
+                </ul> 
+            </fieldset>
+            <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
+        </form>   
+         <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">
         <p>Die Podcast Dateien werden wöchentlich validiert und einen Email versandt, wenn falsch benannte 
