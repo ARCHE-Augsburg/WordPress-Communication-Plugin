@@ -47,7 +47,7 @@
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats. 
         Ab dem 15. eines Monats kann die Vorlage hier exportiert werden.</p>
         <p>Damit ein Event berücksichtigt wird, muss das "Veröffentlichungsdtum Webekanäle" vor dem ersten Tag des Exportmonats liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein. 
-        Es können aus Platzgründen maximal drei Events ausgewählt werden.<p>
+        Es können aus Platzgründen maximal drei Events ausgewählt werden. Events ohne Bild werden nicht berücksichtigt.<p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $month_of_export = $file_export_manager->get_month_of_export_newsletter();

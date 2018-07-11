@@ -53,6 +53,7 @@ class aacp_FileExportManager {
     		{
 	            $query->the_post();
 	        	$event = $this->get_event();
+	        	
 	            array_push($events, $event);
     		}
     	}
@@ -101,7 +102,10 @@ class aacp_FileExportManager {
     		{
 	            $query->the_post();
 	        	$event = $this->get_event();
-	            array_push($events, $event);
+	        	
+	        	if(!empty($event['image'])) {
+	            	array_push($events, $event);
+	        	}
     		}
     	}
 		wp_reset_postdata();
