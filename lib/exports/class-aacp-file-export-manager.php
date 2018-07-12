@@ -186,26 +186,35 @@ class aacp_FileExportManager {
 	}
 	
 	public function get_month_of_export_newsletter() {
-		$month = array(1=>"Januar", 2=>"Februar", 3=>"M&auml;rz", 4=>"April", 
+		$month_to_word = array(1=>"Januar", 2=>"Februar", 3=>"M&auml;rz", 4=>"April", 
 			5=>"Mai", 6=>"Juni", 7=>"Juli", 8=>"August",  9=>"September", 
 			10=>"Oktober", 11=>"November", 12=>"Dezember");
                 
 		$actual_month = date( 'm' );
 		$actual_day = date( 'd' );
+		$actual_year = date( 'Y' );
 		
 		$export_month = array();
 		
 		// If we are after the mid of a month, export the newsletter
 		// for the next month
 		if ( $actual_day > 15 ) {
-		    $export_month_number = $actual_month + 1;
+			if ( $actual_month == 12 ) {
+				$export_month_number = 1;
+				$export_year_number = $actual_year + 1;
+			} else {
+		    	$export_month_number = $actual_month + 1;
+		    	$export_year_number = $actual_year;
+			}
 		}
 		else {
 		    $export_month_number = $actual_month;
+		    $export_year_number = $actual_year;
 		}
 		
 		$export_month['number'] = $export_month_number;
-		$export_month['word'] = $month[$export_month_number];
+		$export_month['word'] = $month_to_word[$export_month_number];
+		$export_month['year'] = $export_year_number;
 		
 		return $export_month;
 	}
