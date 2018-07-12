@@ -1,6 +1,6 @@
 <?php
 
-class aacp_FileRenderer {
+class aacp_NewsletterRenderer {
 	
 	private $defaultTextColor;
 	private $dateTimeSpanColor;

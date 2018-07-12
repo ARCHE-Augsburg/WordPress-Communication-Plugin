@@ -154,7 +154,7 @@ class aacp_Core {
 		/**
 		 * The class responsible for actual rendering the file.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-file-renderer.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/exports/class-aacp-newsletter-renderer.php';
 		
 		/**
 		 * The class responsible for ical synchronization.
