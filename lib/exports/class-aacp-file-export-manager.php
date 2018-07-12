@@ -27,11 +27,12 @@ class aacp_FileExportManager {
     
 	private function export_newsletter ( $event_ids ) {
 		 $events = $this->query_events_for_export( $event_ids );
-		 $file_name = 'CI-ARCHE.docx';
+		 $export_date_info = $this->get_month_of_export_newsletter();
+		 $file_name = $export_date_info['year'] ."-" .  $export_date_info['month_number'] . "_ARCHE-Termine-print.docx";
 		 $file_full_url = $this->exports_url . '/' . $file_name;
 		 $file_full_path = $this->exports_path . '/' . $file_name;
 		 $file_renderer = new aacp_FileRenderer();
-		 $file_renderer->render_newsletter( $events, $file_full_path );
+		 $file_renderer->render_newsletter( $events, $file_full_path, $export_date_info );
 		 return $file_full_url;
 	}
 	
@@ -190,11 +191,11 @@ class aacp_FileExportManager {
 			5=>"Mai", 6=>"Juni", 7=>"Juli", 8=>"August",  9=>"September", 
 			10=>"Oktober", 11=>"November", 12=>"Dezember");
                 
-		$actual_month = date( 'm' );
-		$actual_day = date( 'd' );
+		$actual_month = date( 'n' );
+		$actual_day = date( 'j' );
 		$actual_year = date( 'Y' );
 		
-		$export_month = array();
+		$export_date_info = array();
 		
 		// If we are after the mid of a month, export the newsletter
 		// for the next month
@@ -212,11 +213,11 @@ class aacp_FileExportManager {
 		    $export_year_number = $actual_year;
 		}
 		
-		$export_month['number'] = $export_month_number;
-		$export_month['word'] = $month_to_word[$export_month_number];
-		$export_month['year'] = $export_year_number;
+		$export_date_info['month_number'] = $export_month_number;
+		$export_date_info['month_word'] = $month_to_word[$export_month_number];
+		$export_date_info['year'] = $export_year_number;
 		
-		return $export_month;
+		return $export_date_info;
 	}
 	
 	public function export_service_presentation() {

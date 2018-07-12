@@ -12,12 +12,12 @@ class aacp_FileRenderer {
 		$this->defaultFont = "'Helvetica Neue";
 	}
 
-	public function render_newsletter( $events_to_print, $file_name ) {
+	public function render_newsletter( $events_to_print, $file_name, $export_date_info ) {
 		
 		require_once __DIR__ . '/../../vendor/autoload.php';
 
 		$phpWord = new \PhpOffice\PhpWord\PhpWord();
-		$text = "Januar 2018";
+		$text = $export_date_info['month_word'] . " " . $export_date_info['year'];
 
 		$boldFontStyleName = 'BoldText';
 		$phpWord->addFontStyle($boldFontStyleName, 

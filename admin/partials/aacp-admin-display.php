@@ -50,13 +50,13 @@
         Es können aus Platzgründen maximal drei Events ausgewählt werden. Events ohne Bild werden nicht berücksichtigt.<p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
-                $month_of_export = $file_export_manager->get_month_of_export_newsletter();
-                $events = $file_export_manager->query_events_for_selection( $month_of_export );
+                $export_date_info = $file_export_manager->get_month_of_export_newsletter();
+                $events = $file_export_manager->query_events_for_selection( $export_date_info['month_number'] );
             ?>
         <form id="nl-export-form" method="post">
             <fieldset>
             <input type="hidden" name="action" value="newsletterexport"> 
-            <input type="hidden" name="month" value="<?php echo $month_of_export['number']; ?>">    
+            <input type="hidden" name="month" value="<?php echo $export_date_info['month_number']; ?>">    
                 <ul>
                     <?php foreach ($events as $event) { ?>
                     <li>
@@ -68,7 +68,7 @@
                     <?php } ?> 
                 </ul> 
             </fieldset>
-            <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $month_of_export['word']?> herunterladen">
+            <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $export_date_info['month_word']?> herunterladen">
         </form>   
          <div class="export-print-newsletter-response"></div>
     </div>
