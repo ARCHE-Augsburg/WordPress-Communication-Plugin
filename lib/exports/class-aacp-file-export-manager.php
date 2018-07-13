@@ -33,6 +33,8 @@ class aacp_FileExportManager {
 		 $file_full_path = $this->exports_path . '/' . $file_name;
 		 $file_renderer = new aacp_NewsletterRenderer();
 		 $file_renderer->render_newsletter( $events, $file_full_path, $export_date_info );
+		 $owncloud_dapter = new aacp_OwncloudAdapter();
+		 $owncloud_dapter->upload_file( $file_full_path, 'ARCHE%20Öffentlichkeitsarbeit/Newsletter/' . $export_date_info['year']);
 		 return $file_full_url;
 	}
 	
