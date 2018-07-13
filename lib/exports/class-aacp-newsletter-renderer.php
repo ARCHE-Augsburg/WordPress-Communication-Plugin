@@ -9,7 +9,7 @@ class aacp_NewsletterRenderer {
 	public function __construct (){
 		$this->defaultTextColor = "7d7d7d";
 		$this->dateTimeSpanColor = "555555";
-		$this->defaultFont = "'Helvetica Neue";
+		$this->defaultFont = "Open Sans";
 	}
 
 	public function render_newsletter( $events_to_print, $file_name, $export_date_info ) {
@@ -35,7 +35,7 @@ class aacp_NewsletterRenderer {
 				'name' => $this->defaultFont, 
 				'bgColor' => $this->dateTimeSpanColor, 
 				'color' => 'white', 
-				'size' => 11,
+				'size' => 10,
 			)
 		);
 
@@ -45,7 +45,7 @@ class aacp_NewsletterRenderer {
 				'bold' => true, 
 				'name' => $this->defaultFont, 
 				'color' => $this->defaultTextColor, 
-				'size' => 13
+				'size' => 14
 			)
 		);
 
@@ -88,7 +88,7 @@ class aacp_NewsletterRenderer {
 				'alignment'        => \PhpOffice\PhpWord\SimpleType\Jc::CENTER
 				));
 			$cell = $table->addCell(\PhpOffice\PhpWord\Shared\Converter::cmToTwip(13));
-			$cell->addText($event['date'], $terminDateFontStyleName);
+			$cell->addText($event['date'] . " ", $terminDateFontStyleName);
 			$cell->addText($event['post_title'], $terminHeaderFontStyleName);
 			$cell->addText($event['content'], $terminTextFontStyleName, $terminTextParagraph);
 		}
