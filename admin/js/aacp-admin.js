@@ -121,10 +121,16 @@
 		e.preventDefault();
 	});
 	
-	var limit = 3;
 	$('input.single-checkbox').on('change', function(evt) {
-	   if($('input[name="post_ids[]"]:checked').length > limit) {
+		var limit = 3;
+		var numberOfCheckedItems = $('input[name="post_ids[]"]:checked').length;
+	   if(numberOfCheckedItems > limit) {
 	       this.checked = false;
+	   }
+	   if(numberOfCheckedItems == 0) {
+			$('#export-print-newsletter').attr('disabled', 'disabled');
+	   } else {
+			$('#export-print-newsletter').removeAttr('disabled');
 	   }
 	});
 

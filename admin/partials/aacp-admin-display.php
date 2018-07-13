@@ -68,7 +68,7 @@
                     <?php } ?> 
                 </ul> 
             </fieldset>
-            <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $export_date_info['month_word']?> herunterladen">
+            <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $export_date_info['month_word']?> herunterladen" disabled>
         </form>   
          <div class="export-print-newsletter-response"></div>
     </div>
