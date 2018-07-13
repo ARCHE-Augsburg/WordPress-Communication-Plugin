@@ -65,9 +65,19 @@ class aacp_NewsletterRenderer {
 				'spaceAfter' => 1000
 			)
 		);
+		
+		$phpWord->addParagraphStyle('pStyle',
+			array(
+				'spacing' => 40,
+				'lineHeight' => 1.0
+			)
+		);
 
 		$terminTextParagraph = 'terminTextParagraph';
-		$phpWord->addParagraphStyle($terminTextParagraph, array('align'=>'both', 'spaceAfter'=>50));
+		$phpWord->addParagraphStyle($terminTextParagraph, array('align'=>'both', 'spaceAfter'=>60));
+		
+		\PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(false);
+		
 		// New portrait section
 		$section = $phpWord->addSection(
 			array('marginLeft' => \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1.5),
@@ -88,9 +98,13 @@ class aacp_NewsletterRenderer {
 				'alignment'        => \PhpOffice\PhpWord\SimpleType\Jc::CENTER
 				));
 			$cell = $table->addCell(\PhpOffice\PhpWord\Shared\Converter::cmToTwip(13));
-			$cell->addText($event['date'] . " ", $terminDateFontStyleName);
-			$cell->addText($event['post_title'], $terminHeaderFontStyleName);
-			$cell->addText($event['content'], $terminTextFontStyleName, $terminTextParagraph);
+			$textRun1 = $cell->addTextRun('pStyle');
+			$textRun1->addText(htmlspecialchars($event['date'] . " "), $terminDateFontStyleName);
+			$textRun2 = $cell->addTextRun('pStyle');
+			$textRun2->addText(htmlspecialchars($event['post_title']), $terminHeaderFontStyleName);
+			$textRun3 = $cell->addTextRun('pStyle');
+			$replace = preg_replace('~\R~u', '</w:t><w:br/><w:t>', $event['content']);
+			$textRun3->addText($replace, $terminTextFontStyleName, $terminTextParagraph);
 		}
 
 		// Saving the document as OOXML file...

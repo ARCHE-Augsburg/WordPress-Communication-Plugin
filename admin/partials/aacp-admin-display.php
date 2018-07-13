@@ -62,7 +62,7 @@
                     <li>
                         <label>
                             <input class="single-checkbox" type="checkbox" name="post_ids[]" value="<?php echo $event['post_id']; ?>">
-                            <?php echo $event['post_title']; ?>
+                            <?php echo $event['post_title'] . " - " . $event['date']; ?>
                         </label>
                     </li>
                     <?php } ?> 

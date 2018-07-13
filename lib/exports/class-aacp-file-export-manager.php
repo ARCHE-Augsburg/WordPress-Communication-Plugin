@@ -98,14 +98,14 @@ class aacp_FileExportManager {
 
 		$query = new WP_Query($argu);
 
-    	if($query->have_posts()) {
-    		while ($query->have_posts()) 
+    	if( $query->have_posts() ) {
+    		while ( $query->have_posts() ) 
     		{
 	            $query->the_post();
 	        	$event = $this->get_event();
 	        	
-	        	if(!empty($event['image'])) {
-	            	array_push($events, $event);
+	        	if( !empty( $event['image'] ) && $event['content'] != "" ) {
+	            	array_push( $events, $event );
 	        	}
     		}
     	}
@@ -135,9 +135,6 @@ class aacp_FileExportManager {
 		$text = "";
 		if ( rwmb_meta( 'aa_event_text_alternative' , null, $post->ID  ) != "") {
 			$text = rwmb_meta( 'aa_event_text_alternative' , null, $post->ID );
-		}
-		else {
-			// Maybe we want to handle this situation somehow
 		}
 		return $text;
 	}
