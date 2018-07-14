@@ -6,9 +6,18 @@ class aacp_OwncloudAdapter {
     private $password;
     private $server;
     
-    public function are_owncloud_constants_defined(){
+    private function are_owncloud_constants_defined(){
         $is_active = defined( 'AA_OWNCLOUD_USERNAME') && defined( 'AA_OWNCLOUD_PASSWORD') && defined( 'AA_OWNCLOUD_SERVER');
         return $is_active;
+    }
+    
+    public function get_configuration_status() {
+        if ( $this->are_owncloud_constants_defined() ) {
+            return AACP_SUCCESS_ICON . "aktiv";
+        }
+        else {
+            return AACP_FAILURE_ICON . " nicht aktiv";
+        }
     }
     
     private function initialize() {

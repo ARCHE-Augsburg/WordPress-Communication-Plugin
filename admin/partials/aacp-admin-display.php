@@ -48,7 +48,12 @@
         Ab dem 15. eines Monats kann die Vorlage hier exportiert werden.</p>
         <p>Damit ein Event berücksichtigt wird, muss das "Veröffentlichungsdtum Webekanäle" vor dem ersten Tag des Exportmonats liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein. 
         Es können aus Platzgründen maximal drei Events ausgewählt werden. Events ohne Bild oder Text werden nicht berücksichtigt.<p>
-        <p>Die Exporte werden automatisch in der ARCHE-Cloud unter Öffentlichkeitsarbeit/Newsletter gespeichert, wenn die Zugangsdaten konfiguriert sind.</p>
+        <p>Die Exporte werden automatisch in der ARCHE-Cloud unter Öffentlichkeitsarbeit/Newsletter gespeichert, wenn die Zugangsdaten konfiguriert sind. Status: 
+            <?php
+                $owncloud_adapter = new aacp_OwncloudAdapter();
+                echo $owncloud_adapter->get_configuration_status();
+            ?>
+        </p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $export_date_info = $file_export_manager->get_month_of_export_newsletter();
@@ -74,9 +79,8 @@
         <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">
-        <p>Die Podcast Dateien werden wöchentlich validiert und einen Email versandt, wenn falsch benannte 
-        Dateien entdeckt werden. Fehlerhaft benannte Dateien werden auf der Homepage nicht angezeigt.</p>
-        <p>Status: 
+        <p>Fehlerhaft benannte Dateien werden auf der Homepage nicht angezeigt. Die Podcast Dateien werden wöchentlich validiert und einen Email versandt, wenn falsch benannte 
+        Dateien entdeckt werden. Status: 
             <?php
                 $file_validator = new aacp_FileValidator();
                 echo $file_validator->get_configuration_status();
@@ -91,8 +95,7 @@
     </div>
     <div class="tab-online-newsletter hidden">
         <p>Wenn die Zugangsdaten in der config Datei eingetragen sind, wird die erste Grafikdatei eines Events automatisch
-        mit dem click auf "veröffentlichen" in die Mailchimp Mediathek hochgeladen.</p>
-        <p>Status: 
+        mit dem click auf "veröffentlichen" in die Mailchimp Mediathek hochgeladen. Status: 
             <?php
                 $mailchimp_intrgration = new aacp_MailchimpIntegration();
                 echo $mailchimp_intrgration->get_mailchimp_integration_status();
