@@ -47,7 +47,8 @@
         <p>Der ARCHE-Termine Print-Newsletter erscheint einmal monatlich jeweils Mitte des Vormonats. 
         Ab dem 15. eines Monats kann die Vorlage hier exportiert werden.</p>
         <p>Damit ein Event berücksichtigt wird, muss das "Veröffentlichungsdtum Webekanäle" vor dem ersten Tag des Exportmonats liegen und die Anzeigeeinstellung "ARCHE-Termine print" aktiviert sein. 
-        Es können aus Platzgründen maximal drei Events ausgewählt werden. Events ohne Bild werden nicht berücksichtigt.<p>
+        Es können aus Platzgründen maximal drei Events ausgewählt werden. Events ohne Bild oder Text werden nicht berücksichtigt.<p>
+        <p>Die Exporte werden automatisch in der ARCHE-Cloud unter Öffentlichkeitsarbeit/Newsletter gespeichert, wenn die Zugangsdaten konfiguriert sind.</p>
             <?php
                 $file_export_manager = new aacp_FileExportManager();
                 $export_date_info = $file_export_manager->get_month_of_export_newsletter();
@@ -69,8 +70,8 @@
                 </ul> 
             </fieldset>
             <input type="submit" name="submit" id="export-print-newsletter" class="button button-primary" value="Vorlage <?php echo $export_date_info['month_word']?> herunterladen" disabled>
-        </form>   
-         <div class="export-print-newsletter-response"></div>
+        </form>
+        <div class="export-print-newsletter-response"></div>
     </div>
     <div class="tab-podcast-file-validation hidden">
         <p>Die Podcast Dateien werden wöchentlich validiert und einen Email versandt, wenn falsch benannte 
