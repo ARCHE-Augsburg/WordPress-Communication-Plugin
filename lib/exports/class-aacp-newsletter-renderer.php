@@ -68,9 +68,9 @@ class aacp_NewsletterRenderer {
 		
 		$phpWord->addParagraphStyle('pStyle',
 			array(
-				'spacing' => 10,
+				'spacing' => 5,
 				'lineHeight' => 1.0,
-				'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(5),
+				'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(2),
 				'contextualSpacing' => false 
 			)
 		);
