@@ -26,16 +26,21 @@ class aacp_FileExportManager {
     }
     
 	private function export_newsletter ( $event_ids ) {
+		$this->clear_export_folder();
 		 $events = $this->query_events_for_export( $event_ids );
 		 $export_date_info = $this->get_month_of_export_newsletter();
-		 $file_name = $export_date_info['year'] ."-" .  $export_date_info['month_number'] . "_ARCHE-Termine-print.docx";
+		 $file_name = date('Y-m-d-His') . "_ARCHE-Termine-print_" . $export_date_info['month_word'] . "-" . $export_date_info['year'] . ".docx";
 		 $file_full_url = $this->exports_url . '/' . $file_name;
 		 $file_full_path = $this->exports_path . '/' . $file_name;
 		 $file_renderer = new aacp_NewsletterRenderer();
 		 $file_renderer->render_newsletter( $events, $file_full_path, $export_date_info );
 		 $owncloud_dapter = new aacp_OwncloudAdapter();
-		 $owncloud_dapter->upload_file( $file_full_path, 'ARCHE%20Öffentlichkeitsarbeit/Newsletter/' . $export_date_info['year']);
+		 $owncloud_dapter->upload_file( $file_full_path, 'ARCHE%20Öffentlichkeitsarbeit/Newsletter/' . $export_date_info['year'] . '/');
 		 return $file_full_url;
+	}
+	
+	private function clear_export_folder() {
+		array_map('unlink', glob($this->exports_path ."/*"));
 	}
 	
 	private function query_events_for_export( $event_ids ) {
