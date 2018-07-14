@@ -122,7 +122,7 @@ class aacp_FileExportManager {
 	}
 	
 	private function get_start_date( $month ) {
-		return date('Y') . '-' . $month['number'] . '-1';
+		return date('Y') . '-' . $month . '-1';
 	}
 	
 	private function get_event() {
