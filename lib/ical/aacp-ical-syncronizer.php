@@ -15,8 +15,8 @@ class aacp_IcalSynchronizer {
 	public function synchronize_calendar() {
         $this->synchronize();
         $response = array();
-        $response[] = $synchronizer->evaluate_log_file();
-        $response[] = $synchronizer->evaluate_cache_files();
+        $response[] = $this->evaluate_log_file();
+        $response[] = $this->evaluate_cache_files();
         echo json_encode($response);
         wp_die();
     }
